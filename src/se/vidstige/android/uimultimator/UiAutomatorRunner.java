@@ -21,7 +21,7 @@ class UiAutomatorRunner {
 				"-c", classname + "#" + methodname);
 	}
 
-	public void run(String classname, String methodname, Map<String, String> parameters) throws IOException, InterruptedException, UiMultimatorException {
+	public String run(String classname, String methodname, Map<String, String> parameters) throws IOException, InterruptedException, UiMultimatorException {
 		ArrayList<String> arguments = new ArrayList<String>(Arrays.asList("shell", "uiautomator", "runtest", jarfile,
 				"-c", classname + "#" + methodname));
 		for (Entry<String, String> entry : parameters.entrySet())
@@ -30,6 +30,8 @@ class UiAutomatorRunner {
 			arguments.add(entry.getKey());
 			arguments.add(URLEncoder.encode(entry.getValue(), "utf-8"));
 		}
-		adb.sendAdbCommand(new ReadTestParser(classname, methodname), arguments);
+		ReadTestParser parser = new ReadTestParser(classname, methodname);
+		adb.sendAdbCommand(parser, arguments);
+		return parser.getResponse();
 	}
 }

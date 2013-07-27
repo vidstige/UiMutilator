@@ -28,10 +28,10 @@ public class UiObject {
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("text_selector", selector.getText());
 		
-		runner.run(
+		String result = runner.run(
 				"se.vidstige.android.uimultimator.UiObjectCommands",
 				"testGetText",
 				parameters);
-		return null;
+		return result;
 	}
 }

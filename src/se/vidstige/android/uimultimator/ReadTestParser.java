@@ -3,19 +3,21 @@ package se.vidstige.android.uimultimator;
 import java.io.BufferedReader;
 import java.io.IOException;
 
-import javax.swing.text.html.FormSubmitEvent.MethodType;
-
-import android.R.integer;
-
 class ReadTestParser implements StreamParser{
 
 	private static final String INSTRUMENTATION_STATUS = "INSTRUMENTATION_STATUS: ";
 	private String classname;
 	private String methodname;
-
+	private String response;
+	
 	public ReadTestParser(String classname, String methodname) {
 		this.classname = classname;
 		this.methodname = methodname;
+	}
+	
+	public String getResponse()
+	{
+		return response;
 	}
 
 	@Override
@@ -23,6 +25,7 @@ class ReadTestParser implements StreamParser{
 
 		String line;
 		String lastExceptionMessage = null;
+		response = null;
 		while ((line = input.readLine()) != null)
 		{
 			if (line.startsWith(INSTRUMENTATION_STATUS))
@@ -40,6 +43,11 @@ class ReadTestParser implements StreamParser{
 				{
 					lastExceptionMessage = rest.substring(idx + "UiObjectNotFoundException: ".length()); 
 				}
+			}
+			if (line.startsWith("return:"))
+			{				
+				response = line.substring("return:".length());
+				
 			}
 			if ("FAILURES!!!".equals(line))
 			{

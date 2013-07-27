@@ -31,9 +31,10 @@ public class UiObjectCommands extends UiAutomatorTestCase {
 		UiDevice uiDevice = getUiDevice();		
 		UiObject uiObject = new UiObject(new UiSelector().text(text));
 		String text2 = uiObject.getText();
+		System.out.println("return:" + text2);
 		
-		Bundle bundle = new Bundle();
-		bundle.putString("getText", text2);
-		getAutomationSupport().sendStatus(1234, bundle);
+//		Bundle bundle = new Bundle();
+//		bundle.putString("getText", text2);
+//		getAutomationSupport().sendStatus(1234, bundle);
 	}	
 }
