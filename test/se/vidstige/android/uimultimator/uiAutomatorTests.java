@@ -12,10 +12,12 @@ public class uiAutomatorTests extends UiMultimatorTestCase {
 		uiDevice.pressHome();
 		uiDevice.pressMenu();
 		
-		UiObject settingsOption = new UiObject(new UiSelector().text("System settings"));
-		settingsOption.clickAndWaitForNewWindow();
+		UiObject notFound = new UiObject(new UiSelector().text("noFound"));
+		notFound.clickAndWaitForNewWindow();
+		//UiObject settingsOption = new UiObject(new UiSelector().text("System settings"));
+		//settingsOption.clickAndWaitForNewWindow();
 		
-		UiObject sound = new UiObject(new UiSelector().text("Sound"));
-		Assert.assertEquals("Sound", sound.getText());
+		//UiObject sound = new UiObject(new UiSelector().text("Sound"));
+		//Assert.assertEquals("Sound", sound.getText());
 	}
 }
