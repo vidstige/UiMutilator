@@ -1,5 +1,7 @@
 package se.vidstige.android.uimultimator;
 
+import junit.framework.Assert;
+
 import org.testng.annotations.Test;
 
 public class uiAutomatorTests extends UiMultimatorTestCase {  
@@ -10,6 +12,10 @@ public class uiAutomatorTests extends UiMultimatorTestCase {
 		uiDevice.pressHome();
 		uiDevice.pressMenu();
 		
-		new UiObject(new UiSelector().text("System settings")).clickAndWaitForNewWindow();
+		UiObject settingsOption = new UiObject(new UiSelector().text("System settings"));
+		settingsOption.clickAndWaitForNewWindow();
+		
+		UiObject sound = new UiObject(new UiSelector().text("Sound"));
+		Assert.assertEquals("Sound", sound.getText());
 	}
 }

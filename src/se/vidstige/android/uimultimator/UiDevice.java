@@ -5,22 +5,20 @@ import java.io.IOException;
 public class UiDevice {
 
 	private String serial;
-	private final AdbDevice adb = new AdbDevice();
+	private final UiAutomatorRunner runner = new UiAutomatorRunner();
 	
-	UiDevice(String serial) {
-		this.serial = serial;		
+	UiDevice(String serial) throws IOException, InterruptedException {
+		this.serial = serial;
+		
+		String deluxJar = System.getProperty("user.dir") + "/command-tests/bin/command-tests.jar";
+		runner.sendRaw("push", deluxJar, "/data/local/tmp/");
 	}
 
 	public void pressHome() throws UiMultimatorException, IOException, InterruptedException {
-		String deluxJar = System.getProperty("user.dir") + "/command-tests/bin/command-tests.jar";
-		adb.sendAdbCommand("push", deluxJar, "/data/local/tmp/");
-		
-		adb.sendAdbCommand("shell", "uiautomator", "runtest", "command-tests.jar",
-				"-c", "se.vidstige.android.uimultimator.UiDeviceCommands#testPressHome");		
+		runner.run("se.vidstige.android.uimultimator.UiDeviceCommands", "testPressHome");
 	}
 
 	public void pressMenu() throws IOException, InterruptedException {
-		adb.sendAdbCommand("shell", "uiautomator", "runtest", "command-tests.jar",
-			"-c", "se.vidstige.android.uimultimator.UiDeviceCommands#testPressMenu");
+		runner.run("se.vidstige.android.uimultimator.UiDeviceCommands", "testPressMenu");
 	}
 }

@@ -1,10 +1,19 @@
 package se.vidstige.android.uimultimator;
 
+import java.io.IOException;
+
 
 public class UiMultimatorTestCase {
 
 	protected UiDevice getUiDevice(int index) throws UiMultimatorException {
-		return new UiDevice("<serial>");
+		String serial = "foobar";
+		try {
+			return new UiDevice(serial);
+		} catch (IOException e) {
+			throw new UiMultimatorException("Could not create UiDevice for " + serial);
+		} catch (InterruptedException e) {
+			throw new UiMultimatorException("Could not create UiDevice for " + serial);
+		}
 //		try {
 //			JadbConnection adb = new JadbConnection();
 //			List<AndroidDevice> devices = adb.getDevices();

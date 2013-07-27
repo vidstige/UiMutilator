@@ -1,20 +1,37 @@
 package se.vidstige.android.uimultimator;
 
 import java.io.IOException;
-import java.net.URLEncoder;
+import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class UiObject {
 	private UiSelector selector;
-	private final AdbDevice adb = new AdbDevice();
+	private final UiAutomatorRunner runner = new UiAutomatorRunner();
 	
 	public UiObject(UiSelector selector) {
 		this.selector = selector;
 	}
 
-	public void clickAndWaitForNewWindow() throws IOException, InterruptedException
+	public void clickAndWaitForNewWindow() throws UnsupportedEncodingException, IOException, InterruptedException
 	{
-		adb.sendAdbCommand("shell", "uiautomator", "runtest", "command-tests.jar",
-				"-c", "se.vidstige.android.uimultimator.UiObjectCommands#testClickAndWaitForNewWindow",
-				"-e", "text_selector", URLEncoder.encode(selector.getText(), "utf-8"));
-	}	
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put("text_selector", selector.getText());
+		runner.run(
+				"se.vidstige.android.uimultimator.UiObjectCommands",
+				"testClickAndWaitForNewWindow",
+				parameters);				
+	}
+
+	public String getText() throws UnsupportedEncodingException, IOException, InterruptedException
+	{
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put("text_selector", selector.getText());
+		
+		runner.run(
+				"se.vidstige.android.uimultimator.UiObjectCommands",
+				"testGetText",
+				parameters);
+		return null;
+	}
 }
