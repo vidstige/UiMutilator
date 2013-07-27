@@ -7,7 +7,7 @@ public class UiDevice {
 	private String serial;
 	private final UiAutomatorRunner runner = new UiAutomatorRunner();
 	
-	UiDevice(String serial) throws IOException, InterruptedException {
+	UiDevice(String serial) throws IOException, InterruptedException, UiMultimatorException {
 		this.serial = serial;
 		
 		String deluxJar = System.getProperty("user.dir") + "/command-tests/bin/command-tests.jar";
@@ -18,7 +18,7 @@ public class UiDevice {
 		runner.run("se.vidstige.android.uimultimator.UiDeviceCommands", "testPressHome");
 	}
 
-	public void pressMenu() throws IOException, InterruptedException {
+	public void pressMenu() throws IOException, InterruptedException, UiMultimatorException {
 		runner.run("se.vidstige.android.uimultimator.UiDeviceCommands", "testPressMenu");
 	}
 }

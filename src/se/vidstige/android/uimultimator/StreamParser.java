@@ -1,7 +1,8 @@
 package se.vidstige.android.uimultimator;
 
-import java.io.InputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
 
 interface StreamParser {
-	void parse(InputStream stream);
+	void parse(BufferedReader input) throws IOException, UiMultimatorException;
 }

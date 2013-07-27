@@ -13,7 +13,7 @@ public class UiObject {
 		this.selector = selector;
 	}
 
-	public void clickAndWaitForNewWindow() throws UnsupportedEncodingException, IOException, InterruptedException
+	public void clickAndWaitForNewWindow() throws UnsupportedEncodingException, IOException, InterruptedException, UiMultimatorException
 	{
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("text_selector", selector.getText());
@@ -23,7 +23,7 @@ public class UiObject {
 				parameters);				
 	}
 
-	public String getText() throws UnsupportedEncodingException, IOException, InterruptedException
+	public String getText() throws UnsupportedEncodingException, IOException, InterruptedException, UiMultimatorException
 	{
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("text_selector", selector.getText());

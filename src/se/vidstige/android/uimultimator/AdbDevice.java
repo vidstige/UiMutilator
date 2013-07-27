@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 
 class AdbDevice {
-	public void sendAdbCommand(StreamParser parser, List<String> arguments) throws IOException, InterruptedException
+	public void sendAdbCommand(StreamParser parser, List<String> arguments) throws IOException, InterruptedException, UiMultimatorException
 	{
 		String android_home = System.getenv("ANDROID_HOME");
 		List<String> command_and_arguments = new ArrayList<String>(arguments);
@@ -17,17 +17,11 @@ class AdbDevice {
 		
 		Process p = processBuilder.start();
 		BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
-		
-		String line;
-		while ((line = input.readLine()) != null)
-		{
-			System.out.println("line: " + line);
-		}
-		
+		parser.parse(input);
 		input.close();	
 	}
 	
-	public void sendAdbCommand(StreamParser parser, String ... arguments) throws IOException, InterruptedException
+	public void sendAdbCommand(StreamParser parser, String ... arguments) throws IOException, InterruptedException, UiMultimatorException
 	{
 		sendAdbCommand(parser, Arrays.asList(arguments));
 	}
