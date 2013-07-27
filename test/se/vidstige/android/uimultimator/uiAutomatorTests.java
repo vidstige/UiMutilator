@@ -6,18 +6,26 @@ import org.testng.annotations.Test;
 
 public class uiAutomatorTests extends UiMultimatorTestCase {  
 		
-	@Test
-	public void f() throws Exception {
+	@Test(expectedExceptions=UiMultimatorException.class)
+	public void testUiSelectorThatWillThrow() throws Exception {
 		UiDevice uiDevice = getUiDevice(0);
 		uiDevice.pressHome();
 		uiDevice.pressMenu();
 		
-		UiObject notFound = new UiObject(new UiSelector().text("noFound"));
+		UiObject notFound = new UiObject(new UiSelector().text("notFound"));
 		notFound.clickAndWaitForNewWindow();
-		//UiObject settingsOption = new UiObject(new UiSelector().text("System settings"));
-		//settingsOption.clickAndWaitForNewWindow();
+	}
+	
+	@Test
+	public void testGetText() throws Exception {
+		UiDevice uiDevice = getUiDevice(0);
+		uiDevice.pressHome();
+		uiDevice.pressMenu();
 		
-		//UiObject sound = new UiObject(new UiSelector().text("Sound"));
-		//Assert.assertEquals("Sound", sound.getText());
+		UiObject settingsOption = new UiObject(new UiSelector().text("System settings"));
+		settingsOption.clickAndWaitForNewWindow();
+		
+		UiObject sound = new UiObject(new UiSelector().text("Sound"));
+		Assert.assertEquals("Sound", sound.getText());
 	}
 }
