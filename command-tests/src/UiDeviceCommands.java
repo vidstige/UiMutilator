@@ -9,7 +9,11 @@ public class UiDeviceCommands extends UiAutomatorTestCase {
 	
 	public void testPressHome()
 	{
-		UiDevice uiDevice = getUiDevice();
-		uiDevice.pressHome();
+		getUiDevice().pressHome();
+	}
+	
+	public void testPressMenu()
+	{
+		getUiDevice().pressMenu();
 	}
 }

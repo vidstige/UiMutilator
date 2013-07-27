@@ -2,23 +2,25 @@ package se.vidstige.android.uimultimator;
 
 import java.io.IOException;
 
-import se.vidstige.jadb.AndroidDevice;
-import se.vidstige.jadb.JadbException;
-
 public class UiDevice {
 
-	private AndroidDevice androidDevice;
-
-	UiDevice(AndroidDevice androidDevice) {
-		this.androidDevice = androidDevice;
+	private String serial;
+	private final AdbDevice adb = new AdbDevice();
+	
+	UiDevice(String serial) {
+		this.serial = serial;		
 	}
 
-	public void pressHome() throws UiMultimatorException {
-		try {
-			androidDevice.push("C:\\abc.jar", "/data/local/tmp/");
-			androidDevice.executeShell("uiautomator", "runtest", "LaunchSettings.jar");
-		} catch (IOException | JadbException e) {
-			throw new UiMultimatorException("Could not press home", e);
-		}
+	public void pressHome() throws UiMultimatorException, IOException, InterruptedException {
+		String deluxJar = System.getProperty("user.dir") + "/command-tests/bin/command-tests.jar";
+		adb.sendAdbCommand("push", deluxJar, "/data/local/tmp/");
+		
+		adb.sendAdbCommand("shell", "uiautomator", "runtest", "command-tests.jar",
+				"-c", "se.vidstige.android.uimultimator.UiDeviceCommands#testPressHome");		
+	}
+
+	public void pressMenu() throws IOException, InterruptedException {
+		adb.sendAdbCommand("shell", "uiautomator", "runtest", "command-tests.jar",
+			"-c", "se.vidstige.android.uimultimator.UiDeviceCommands#testPressMenu");
 	}
 }
