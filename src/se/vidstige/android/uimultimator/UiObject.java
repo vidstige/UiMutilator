@@ -7,9 +7,10 @@ import java.util.Map;
 
 public class UiObject {
 	private UiSelector selector;
-	private final UiAutomatorRunner runner = new UiAutomatorRunner();
+	private final UiAutomatorRunner runner;
 	
-	public UiObject(UiSelector selector) {
+	UiObject(UiAutomatorRunner runner, UiSelector selector) {
+		this.runner = runner;
 		this.selector = selector;
 	}
 

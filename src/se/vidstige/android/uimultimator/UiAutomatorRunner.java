@@ -10,6 +10,11 @@ import java.util.Map.Entry;
 class UiAutomatorRunner {
 	private AdbDevice adb = new AdbDevice();
 	private String jarfile = "command-tests.jar";
+	private String serial;
+
+	public UiAutomatorRunner(String serial) {
+		this.serial = serial;
+	}
 
 	public void sendRaw(String ... arguments) throws IOException, InterruptedException, UiMultimatorException {
 		adb.sendAdbCommand(new DummyParser(), arguments);		
