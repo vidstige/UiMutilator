@@ -6,29 +6,29 @@ import com.android.uiautomator.core.UiObject;
 import com.android.uiautomator.core.UiObjectNotFoundException;
 
 public class UiObjectCommands extends UiCommandsTestCase {
+
+	private UiObject uiObject() throws UnsupportedEncodingException {
+		return new UiObject(recreateSelector());
+	}	
 	
 	public void testSetText() throws UiObjectNotFoundException, UnsupportedEncodingException
 	{
-		UiObject uiObject = new UiObject(recreateSelector());
-		uiObject.setText(getParams().getString("set_text"));	
+		uiObject().setText(getParams().getString("set_text"));	
 	}
-	
+
 	public void testClearTextField() throws UiObjectNotFoundException, UnsupportedEncodingException
 	{
-		UiObject uiObject = new UiObject(recreateSelector());
-		uiObject.clearTextField();
+		uiObject().clearTextField();
 	}
 	
 	public void testClickAndWaitForNewWindow() throws UiObjectNotFoundException, UnsupportedEncodingException
 	{		
-		UiObject uiObject = new UiObject(recreateSelector());
-		uiObject.clickAndWaitForNewWindow();
+		uiObject().clickAndWaitForNewWindow();
 	}
 	
 	public void testGetText() throws UiObjectNotFoundException, UnsupportedEncodingException
 	{		
-		UiObject uiObject = new UiObject(recreateSelector());
-		String text = uiObject.getText();
+		String text = uiObject().getText();
 		respond(text);
-	}	
+	}
 }

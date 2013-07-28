@@ -27,8 +27,10 @@ class UiAutomatorRunner {
 	public void run(String classname, String methodname) throws UiMultimatorException
 	{
 		try {
-			adb.sendAdbCommand(new ReadTestParser(classname, methodname), "shell", "uiautomator", "runtest", jarfile,
+			ReadTestParser parser = new ReadTestParser(classname, methodname);
+			adb.sendAdbCommand(parser, "shell", "uiautomator", "runtest", jarfile,
 					"-c", classname + "#" + methodname);
+			parser.verify();
 		} catch (AdbException e) {
 			throw new UiMultimatorException("Could not run uiautomator test: " + classname + "#" + methodname, e);
 		}
@@ -47,6 +49,7 @@ class UiAutomatorRunner {
 			}
 			ReadTestParser parser = new ReadTestParser(classname, methodname);
 			adb.sendAdbCommand(parser, arguments);
+			parser.verify();
 			return parser.getResponse();
 		}
 		catch (UnsupportedEncodingException  e)
