@@ -56,7 +56,11 @@ class ReadTestParser implements StreamParser{
 				throw new UiMultimatorException("UiObject not found: " + lastExceptionMessage);
 			}
 			
-			//System.out.println("line: " + line);
+			System.out.println("line: " + line);
 		}
+	}
+
+	@Override
+	public void parseErrors(BufferedReader input) throws IOException {
 	}
 }
