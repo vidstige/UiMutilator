@@ -21,9 +21,11 @@ class AdbDevice {
 		if (arguments == null) throw new IllegalArgumentException("arguments cannot be null");
 		if (parser == null) throw new IllegalArgumentException("parser cannot be null");
 		
+		String android_home = System.getenv("ANDROID_HOME");
+		if (android_home == null) throw new AdbException("Environment variable ANDROID_HOME not set");
+		
 		try
 		{
-			String android_home = System.getenv("ANDROID_HOME");
 			List<String> command_and_arguments = new ArrayList<String>(arguments);
 			command_and_arguments.add(0, android_home + "/platform-tools/adb");
 			if (serial != null)
