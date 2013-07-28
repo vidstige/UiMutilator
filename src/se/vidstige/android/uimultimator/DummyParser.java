@@ -19,7 +19,7 @@ class DummyParser implements StreamParser {
 		String line;
 		while ((line = input.readLine()) != null)			
 		{
-			System.out.println("line: " + line);
+			//System.out.println("line: " + line);
 			if (line.startsWith("error: "))
 			{
 				throw new AdbException(line.substring("error: ".length()));

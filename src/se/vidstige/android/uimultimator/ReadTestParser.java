@@ -28,6 +28,8 @@ class ReadTestParser implements StreamParser{
 		response = null;
 		while ((line = input.readLine()) != null)
 		{
+			//System.out.println("line: " + line);
+			
 			if (line.startsWith(INSTRUMENTATION_STATUS))
 			{
 				String rest = line.substring(INSTRUMENTATION_STATUS.length());
@@ -55,8 +57,6 @@ class ReadTestParser implements StreamParser{
 					throw new UiMultimatorException("Could not execute " + classname + "#" + methodname + " on device");
 				throw new UiMultimatorException("UiObject not found: " + lastExceptionMessage);
 			}
-			
-			System.out.println("line: " + line);
 		}
 	}
 
