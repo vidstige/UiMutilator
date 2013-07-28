@@ -28,5 +28,14 @@ public class UiMultimatorTestCase {
 		{
 			return new UiDevice(serial);		
 		}
+
+		public UiDevice first() throws UiMultimatorException {
+			return number(0);			
+		}
+		
+		public UiDevice second() throws UiMultimatorException
+		{
+			return number(1);
+		}
 	}
 }
