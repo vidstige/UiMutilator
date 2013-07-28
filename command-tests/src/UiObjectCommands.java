@@ -13,28 +13,52 @@ import com.android.uiautomator.testrunner.UiAutomatorTestCase;
 
 public class UiObjectCommands extends UiAutomatorTestCase {
 	
-	public void testClickAndWaitForNewWindow() throws UiObjectNotFoundException, UnsupportedEncodingException
+	private UiSelector recreateSelector() throws UnsupportedEncodingException
 	{
-		String text = getParams().getString("text_selector");
-		text = URLDecoder.decode(text, "utf-8");
-		
-		UiDevice uiDevice = getUiDevice();		
-		UiObject uiObject = new UiObject(new UiSelector().text(text));
+		String selector_type = getParams().getString("selector_type");
+		String p = URLDecoder.decode(getParams().getString("selector_parameter"), "utf-8");
+		if ("text".equals(selector_type))
+		{
+			return new UiSelector().text(p);
+		}
+		else if ("classNameMatches".equals(selector_type))
+		{
+			return new UiSelector().classNameMatches(p);
+		}
+		else if ("className".equals(selector_type))
+		{
+			return new UiSelector().className(p);
+		}
+		throw new IllegalStateException("Could not deserialize UiSelector of type " + selector_type);
+	}
+	
+	private void respond(String response)
+	{
+		System.out.println("return:" + response);		
+	}
+	
+	public void testSetText() throws UiObjectNotFoundException, UnsupportedEncodingException
+	{
+		UiObject uiObject = new UiObject(recreateSelector());
+		uiObject.setText(getParams().getString("set_text"));	
+	}
+	
+	public void testClearTextField() throws UiObjectNotFoundException, UnsupportedEncodingException
+	{
+		UiObject uiObject = new UiObject(recreateSelector());
+		uiObject.clearTextField();
+	}
+	
+	public void testClickAndWaitForNewWindow() throws UiObjectNotFoundException, UnsupportedEncodingException
+	{		
+		UiObject uiObject = new UiObject(recreateSelector());
 		uiObject.clickAndWaitForNewWindow();
 	}
 	
 	public void testGetText() throws UiObjectNotFoundException, UnsupportedEncodingException
-	{
-		String text = getParams().getString("text_selector");
-		text = URLDecoder.decode(text, "utf-8");
-		
-		UiDevice uiDevice = getUiDevice();		
-		UiObject uiObject = new UiObject(new UiSelector().text(text));
-		String text2 = uiObject.getText();
-		System.out.println("return:" + text2);
-		
-//		Bundle bundle = new Bundle();
-//		bundle.putString("getText", text2);
-//		getAutomationSupport().sendStatus(1234, bundle);
+	{		
+		UiObject uiObject = new UiObject(recreateSelector());
+		String text = uiObject.getText();
+		respond(text);
 	}	
 }

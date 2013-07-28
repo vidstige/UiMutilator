@@ -17,7 +17,6 @@ public class uiAutomatorTests extends UiMultimatorTestCase {
 	
 	@Test
 	public void testGetText() throws Exception {
-		getUiDevice().first();
 		UiDevice uiDevice = getUiDevice().withSerial("emulator-5554");
 		uiDevice.pressHome();
 		uiDevice.pressMenu();
@@ -27,5 +26,23 @@ public class uiAutomatorTests extends UiMultimatorTestCase {
 		
 		UiObject sound = uiDevice.newUiObject(new UiSelector().text("Sound"));
 		Assert.assertEquals("Sound", sound.getText());
+	}
+	
+	@Test
+	public void testClearText() throws Exception
+	{
+		UiDevice uiDevice = getUiDevice().any();
+		uiDevice.pressHome();
+		
+		UiObject messagingButton = uiDevice.newUiObject(new UiSelector().text("Messaging"));
+		messagingButton.clickAndWaitForNewWindow();
+		
+		UiObject newMessageButton = uiDevice.newUiObject(new UiSelector().text("New message"));
+		newMessageButton.clickAndWaitForNewWindow();
+		
+		UiObject toText = uiDevice.newUiObject(new UiSelector().className("android.widget.MultiAutoCompleteTextView"));
+		toText.setText("lollipop");
+	
+		toText.clearTextField();		
 	}
 }
