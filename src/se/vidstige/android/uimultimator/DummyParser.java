@@ -6,7 +6,7 @@ import java.io.IOException;
 class DummyParser implements StreamParser {
 
 	@Override
-	public void parse(BufferedReader input) throws IOException, AdbException {
+	public void parse(BufferedReader input) throws IOException {
 		String line;
 		while ((line = input.readLine()) != null)			
 		{
