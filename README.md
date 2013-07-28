@@ -13,7 +13,7 @@ This has the advantage of beeing to interleave ui commands and assertions betwee
 Instead of calling `new UiObject()` like in the Android UiAutomator, you have to call `uiDevice.newUiObject()`. This is because *UiMultimator* needs to know on which device you intend to act, since a test may be connected to several devices.
 
 ## Example ##
-This is an example of a *UiMultimator *test
+This is an example of a *UiMultimator* test
 
     @Test
 	public void testGetText() throws Exception {
