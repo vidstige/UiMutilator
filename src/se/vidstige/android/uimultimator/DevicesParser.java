@@ -19,9 +19,14 @@ public class DevicesParser implements StreamParser {
 			}
 		}
 	}
+
+	@Override
+	public void parseErrors(BufferedReader input) throws IOException {		
+	}
 	
 	public List<String> getDeviceSerials()
 	{
 		return deviceSerials;		
 	}
+
 }
