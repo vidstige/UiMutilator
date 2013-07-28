@@ -8,6 +8,15 @@ import java.util.Arrays;
 import java.util.List;
 
 class AdbDevice {
+	
+	private String serial;
+
+	public AdbDevice() { this(null); }
+	public AdbDevice(String serial)
+	{
+		this.serial = serial;		
+	}
+	
 	public void sendAdbCommand(StreamParser parser, List<String> arguments) throws UiMultimatorException
 	{
 		if (arguments == null) throw new IllegalArgumentException("arguments cannot be null");
@@ -18,6 +27,11 @@ class AdbDevice {
 			String android_home = System.getenv("ANDROID_HOME");
 			List<String> command_and_arguments = new ArrayList<String>(arguments);
 			command_and_arguments.add(0, android_home + "/platform-tools/adb");
+			if (serial != null)
+			{
+				command_and_arguments.add(1, "-s");
+				command_and_arguments.add(2, serial);
+			}
 			ProcessBuilder processBuilder = new ProcessBuilder(command_and_arguments);
 			
 			Process p = processBuilder.start();

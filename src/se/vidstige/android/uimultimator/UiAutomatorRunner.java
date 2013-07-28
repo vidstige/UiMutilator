@@ -8,12 +8,11 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 class UiAutomatorRunner {
-	private AdbDevice adb = new AdbDevice();
-	private String jarfile = "command-tests.jar";
-	private String serial;
+	private final AdbDevice adb;
+	private final String jarfile = "command-tests.jar";
 
 	public UiAutomatorRunner(String serial) {
-		this.serial = serial;
+		adb = new AdbDevice(serial);
 	}
 
 	public void sendRaw(String ... arguments) throws IOException, InterruptedException, UiMultimatorException {

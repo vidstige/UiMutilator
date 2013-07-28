@@ -18,7 +18,7 @@ public class uiAutomatorTests extends UiMultimatorTestCase {
 	
 	@Test
 	public void testGetText() throws Exception {
-		UiDevice uiDevice = getUiDevice().any();
+		UiDevice uiDevice = getUiDevice().withSerial("emulator-5554");
 		uiDevice.pressHome();
 		uiDevice.pressMenu();
 		
