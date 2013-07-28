@@ -9,9 +9,10 @@ import java.util.Map.Entry;
 
 class UiAutomatorRunner {
 	private final AdbDevice adb;
-	private final String jarfile = "command-tests.jar";
+	private final String jarfile;
 
-	public UiAutomatorRunner(String serial) {
+	public UiAutomatorRunner(String serial, String jarfile) {
+		this.jarfile = jarfile;
 		adb = new AdbDevice(serial);
 	}
 
