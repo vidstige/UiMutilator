@@ -6,7 +6,7 @@ import java.io.IOException;
 class DummyParser implements StreamParser {
 
 	@Override
-	public void parse(BufferedReader input) throws IOException, UiMultimatorException {
+	public void parse(BufferedReader input) throws IOException, AdbException {
 		String line;
 		while ((line = input.readLine()) != null)			
 		{
@@ -15,14 +15,14 @@ class DummyParser implements StreamParser {
 	}
 	
 	@Override
-	public void parseErrors(BufferedReader input) throws IOException, UiMultimatorException {
+	public void parseErrors(BufferedReader input) throws IOException, AdbException {
 		String line;
 		while ((line = input.readLine()) != null)			
 		{
 			System.out.println("line: " + line);
 			if (line.startsWith("error: "))
 			{
-				throw new UiMultimatorException(line.substring("error: ".length()));
+				throw new AdbException(line.substring("error: ".length()));
 			}
 		}
 	}

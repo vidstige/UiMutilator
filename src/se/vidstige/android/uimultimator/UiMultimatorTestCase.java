@@ -14,14 +14,21 @@ public class UiMultimatorTestCase {
 		}
 		
 		public UiDevice number(int n) throws UiMultimatorException
-		{			
-			if (n < 0) throw new IllegalArgumentException("n must be >= 0");
-			DevicesParser parser = new DevicesParser();
-			new AdbDevice().sendAdbCommand(parser, "devices");
-			if (n >= parser.getDeviceSerials().size())
-				throw new UiMultimatorException("Could not connect to device " + n + ", only " + parser.getDeviceSerials().size() + " connected");
-			String serial = parser.getDeviceSerials().get(n);
-			return new UiDevice(serial);
+		{
+			try
+			{
+				if (n < 0) throw new IllegalArgumentException("n must be >= 0");
+				DevicesParser parser = new DevicesParser();
+				new AdbDevice().sendAdbCommand(parser, "devices");
+				if (n >= parser.getDeviceSerials().size())
+					throw new UiMultimatorException("Could not connect to device " + n + ", only " + parser.getDeviceSerials().size() + " connected");
+				String serial = parser.getDeviceSerials().get(n);
+				return new UiDevice(serial);
+			}
+			catch (AdbException e)
+			{
+				throw new UiMultimatorException("Could not get devices", e);
+			}
 		}
 		
 		public UiDevice withSerial(String serial) throws UiMultimatorException

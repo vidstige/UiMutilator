@@ -17,13 +17,21 @@ class UiAutomatorRunner {
 	}
 
 	public void sendRaw(String ... arguments) throws UiMultimatorException {
-		adb.sendAdbCommand(new DummyParser(), arguments);		
+		try {
+			adb.sendAdbCommand(new DummyParser(), arguments);
+		} catch (AdbException e) {
+			throw new UiMultimatorException("Could not run raw command", e);
+		}		
 	}
 	
 	public void run(String classname, String methodname) throws UiMultimatorException
 	{
-		adb.sendAdbCommand(new ReadTestParser(classname, methodname), "shell", "uiautomator", "runtest", jarfile,
-				"-c", classname + "#" + methodname);
+		try {
+			adb.sendAdbCommand(new ReadTestParser(classname, methodname), "shell", "uiautomator", "runtest", jarfile,
+					"-c", classname + "#" + methodname);
+		} catch (AdbException e) {
+			throw new UiMultimatorException("Could not run uiautomator test: " + classname + "#" + methodname, e);
+		}
 	}
 
 	public String run(String classname, String methodname, Map<String, String> parameters) throws UiMultimatorException {
@@ -43,6 +51,8 @@ class UiAutomatorRunner {
 		}
 		catch (UnsupportedEncodingException  e)
 		{
+			throw new UiMultimatorException("Could not run test on device", e);
+		} catch (AdbException e) {
 			throw new UiMultimatorException("Could not run test on device", e);
 		}
 	}
