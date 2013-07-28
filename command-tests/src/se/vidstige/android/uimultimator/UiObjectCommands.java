@@ -9,7 +9,25 @@ public class UiObjectCommands extends UiCommandsTestCase {
 
 	private UiObject uiObject() throws UnsupportedEncodingException {
 		return new UiObject(recreateSelector());
-	}	
+	}
+	
+	public void testClick() throws UiObjectNotFoundException, UnsupportedEncodingException {
+		uiObject().click();	
+	}
+	public void testLongClick() throws UiObjectNotFoundException, UnsupportedEncodingException {
+		uiObject().longClick();	
+	}
+	
+	public void testGetContentDescription() throws UiObjectNotFoundException, UnsupportedEncodingException {		
+		respond(uiObject().getContentDescription());
+	}
+	
+	public void testIsChecked() throws UiObjectNotFoundException, UnsupportedEncodingException {		
+		respond(uiObject().isChecked());
+	}
+	public void testIsEnabled() throws UiObjectNotFoundException, UnsupportedEncodingException {		
+		respond(uiObject().isEnabled());
+	}
 	
 	public void testSetText() throws UiObjectNotFoundException, UnsupportedEncodingException
 	{

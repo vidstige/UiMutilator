@@ -14,6 +14,38 @@ public class UiObject {
 		this.selector = selector;
 	}
 
+	private void run(String methodname) throws UiMultimatorException {
+		runner.run("se.vidstige.android.uimultimator.UiObjectCommands", methodname);
+	}
+	private boolean runBool(String methodname) throws UiMultimatorException {
+		String result = runner.run("se.vidstige.android.uimultimator.UiObjectCommands", methodname, new HashMap<String, String>(0));
+		return Boolean.parseBoolean(result);
+	}
+	
+	public void click() throws UiMultimatorException {
+		run("testClick");
+	}
+	
+	public void testLongClick() throws UiMultimatorException {
+		run("testLongClick");
+	}
+	
+	public String getContentDescription() throws UiMultimatorException {		
+		String result = runner.run(
+				"se.vidstige.android.uimultimator.UiObjectCommands",
+				"testGetContentDescription",
+				new HashMap<String, String>(0));
+		return result;
+	}
+	
+	public boolean isChecked() throws UiMultimatorException {		
+		return runBool("testIsChecked");
+	}
+	
+	public boolean isEnabled() throws UiMultimatorException {
+		return runBool("testIsEnabled");
+	}
+	
 	public void clickAndWaitForNewWindow() throws UnsupportedEncodingException, IOException, InterruptedException, UiMultimatorException
 	{
 		Map<String, String> parameters = new HashMap<String, String>();
