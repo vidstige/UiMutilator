@@ -42,6 +42,14 @@ public class UiDevice {
 			throw new UiMultimatorException("Could not create UiDevice", e);			
 		}
 	}
+	
+	public void takeScreenshot(File destination) throws UiMultimatorException
+	{
+		String tmpfile = "/data/local/tmp/screen-capture.png";
+		runner.sendRaw("shell", "screencap", "-p", tmpfile);
+		runner.sendRaw("pull", tmpfile, destination.getPath());
+		runner.sendRaw("shell", "rm", tmpfile);
+	}
 
 	public UiObject newUiObject(UiSelector selector) {
 		return new UiObject(runner, selector);

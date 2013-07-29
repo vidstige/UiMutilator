@@ -1,5 +1,8 @@
 package se.vidstige.android.uimultimator;
 
+import java.io.File;
+import java.io.IOException;
+
 import junit.framework.Assert;
 
 import org.testng.annotations.Test;
@@ -44,5 +47,14 @@ public class uiAutomatorTests extends UiMultimatorTestCase {
 		toText.setText("lollipop");
 	
 		toText.clearTextField();		
+	}
+	
+	@Test
+	public void testScreencapture() throws UiMultimatorException, IOException
+	{
+		UiDevice uiDevice = getUiDevice().any();
+		File file = File.createTempFile("sceenshot", ".png");
+		uiDevice.takeScreenshot(file);
+		System.out.println("Screen capture saved to: " + file.getAbsolutePath());
 	}
 }
