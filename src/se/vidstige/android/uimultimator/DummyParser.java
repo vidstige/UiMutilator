@@ -7,11 +7,11 @@ class DummyParser implements StreamParser {
 
 	@Override
 	public void parse(BufferedReader input) throws IOException {
-		String line;
-		while ((line = input.readLine()) != null)			
-		{
-			System.out.println("line: " + line);
-		}
+//		String line;
+//		while ((line = input.readLine()) != null)			
+//		{
+//			System.out.println("line: " + line);
+//		}
 	}
 	
 	@Override
