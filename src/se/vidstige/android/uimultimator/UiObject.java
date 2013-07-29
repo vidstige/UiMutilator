@@ -1,7 +1,6 @@
 package se.vidstige.android.uimultimator;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,11 +13,14 @@ public class UiObject {
 		this.selector = selector;
 	}
 
-	private void run(String methodname) throws UiMultimatorException {
-		runner.run("se.vidstige.android.uimultimator.UiObjectCommands", methodname);
+	private String run(String methodname) throws UiMultimatorException {
+		Map<String, String> parameters = new HashMap<String, String>();
+		selector.serializeTo(parameters);
+		return runner.run("se.vidstige.android.uimultimator.UiObjectCommands", methodname, parameters);
 	}
+	
 	private boolean runBool(String methodname) throws UiMultimatorException {
-		String result = runner.run("se.vidstige.android.uimultimator.UiObjectCommands", methodname, new HashMap<String, String>(0));
+		String result = run(methodname);
 		return Boolean.parseBoolean(result);
 	}
 	
@@ -30,12 +32,8 @@ public class UiObject {
 		run("testLongClick");
 	}
 	
-	public String getContentDescription() throws UiMultimatorException {		
-		String result = runner.run(
-				"se.vidstige.android.uimultimator.UiObjectCommands",
-				"testGetContentDescription",
-				new HashMap<String, String>(0));
-		return result;
+	public String getContentDescription() throws UiMultimatorException {	
+		return run("testGetContentDescription");
 	}
 	
 	public boolean isChecked() throws UiMultimatorException {		
@@ -46,26 +44,12 @@ public class UiObject {
 		return runBool("testIsEnabled");
 	}
 	
-	public void clickAndWaitForNewWindow() throws UnsupportedEncodingException, IOException, InterruptedException, UiMultimatorException
-	{
-		Map<String, String> parameters = new HashMap<String, String>();
-		selector.serializeTo(parameters);
-		runner.run(
-				"se.vidstige.android.uimultimator.UiObjectCommands",
-				"testClickAndWaitForNewWindow",
-				parameters);				
+	public void clickAndWaitForNewWindow() throws IOException, InterruptedException, UiMultimatorException {
+		run("testClickAndWaitForNewWindow");
 	}
 
-	public String getText() throws UnsupportedEncodingException, IOException, InterruptedException, UiMultimatorException
-	{
-		Map<String, String> parameters = new HashMap<String, String>();
-		selector.serializeTo(parameters);		
-		
-		String result = runner.run(
-				"se.vidstige.android.uimultimator.UiObjectCommands",
-				"testGetText",
-				parameters);
-		return result;
+	public String getText() throws IOException, InterruptedException, UiMultimatorException {
+		return run("testGetText");
 	}
 
 	public void setText(String text) throws IOException, InterruptedException, UiMultimatorException {
@@ -81,12 +65,6 @@ public class UiObject {
 	}
 
 	public void clearTextField() throws IOException, InterruptedException, UiMultimatorException {
-		Map<String, String> parameters = new HashMap<String, String>();
-		selector.serializeTo(parameters);
-				
-		runner.run(
-				"se.vidstige.android.uimultimator.UiObjectCommands",
-				"testClearTextField",
-				parameters);
+		run("testClearTextField");
 	}
 }

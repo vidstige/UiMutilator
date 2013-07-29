@@ -1,6 +1,5 @@
 package se.vidstige.android.uimultimator;
 
-import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
 public class UiSelector {
@@ -26,9 +25,8 @@ public class UiSelector {
 		return this;
 	}
 
-	void serializeTo(Map<String, String> parameters) throws UnsupportedEncodingException {
+	void serializeTo(Map<String, String> parameters) {
 		parameters.put("selector_type", type);
 		parameters.put("selector_parameter", parameter);
 	}
-
 }

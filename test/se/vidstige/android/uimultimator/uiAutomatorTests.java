@@ -57,4 +57,14 @@ public class uiAutomatorTests extends UiMultimatorTestCase {
 		uiDevice.takeScreenshot(file);
 		System.out.println("Screen capture saved to: " + file.getAbsolutePath());
 	}
+
+	@Test
+	public void testClick() throws UiMultimatorException, IOException
+	{
+		UiDevice uiDevice = getUiDevice().any();
+		uiDevice.pressHome();
+		
+		UiObject messagingButton = uiDevice.newUiObject(new UiSelector().text("Messaging"));
+		messagingButton.click();
+	}
 }
