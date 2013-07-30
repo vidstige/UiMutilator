@@ -14,12 +14,14 @@ import se.vidstige.android.adb.AdbException;
 
 public class UiDevice {
 
+	private final Adb adb;
 	private final UiAutomatorRunner runner;
 	
 	UiDevice(AdbDevice device) throws UiMultimatorException {
 		try
 		{
-			runner = new UiAutomatorRunner(device, "command-tests.jar");
+			adb = new Adb(device);
+			runner = new UiAutomatorRunner(adb, "command-tests.jar");
 			
 			File deluxJar = null;
 			InputStream input = getClass().getResourceAsStream("command-tests/bin/command-tests.jar");
@@ -38,7 +40,7 @@ public class UiDevice {
 			
 			if (deluxJar == null) throw new IllegalStateException("Could not find command-tests.jar in jar-file");
 		
-			new Adb(device).push(deluxJar, "/data/local/tmp/command-tests.jar");
+			adb.push(deluxJar, "/data/local/tmp/command-tests.jar");
 		}
 		catch (IOException e) {
 			throw new UiMultimatorException("Could not create UiDevice", e);			
@@ -49,10 +51,17 @@ public class UiDevice {
 	
 	public void takeScreenshot(File destination) throws UiMultimatorException
 	{
-		String tmpfile = "/data/local/tmp/screen-capture.png";
-		runner.sendRaw("shell", "screencap", "-p", tmpfile);
-		runner.sendRaw("pull", tmpfile, destination.getPath());
-		runner.sendRaw("shell", "rm", tmpfile);
+		try
+		{
+			String tmpfile = "/data/local/tmp/screen-capture.png";
+			adb.sendAdbCommand("shell", "screencap", "-p", tmpfile);
+			adb.sendAdbCommand(false, "pull", tmpfile, destination.getPath()); // ignore errors as pull prints transfer rates to stderr
+			adb.sendAdbCommand("shell", "rm", tmpfile);
+		}
+		catch (AdbException e)
+		{
+			throw new UiMultimatorException("Could save take screenshot to " + destination.getPath(), e);
+		}
 	}
 
 	public UiObject newUiObject(UiSelector selector) {

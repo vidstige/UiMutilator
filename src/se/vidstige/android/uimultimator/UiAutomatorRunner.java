@@ -8,26 +8,17 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import se.vidstige.android.adb.Adb;
-import se.vidstige.android.adb.AdbDevice;
 import se.vidstige.android.adb.AdbException;
 
 class UiAutomatorRunner {
 	private final Adb adb;
 	private final String jarfile;
 
-	public UiAutomatorRunner(AdbDevice device, String jarfile) {
+	public UiAutomatorRunner(Adb adb, String jarfile) {
 		this.jarfile = jarfile;
-		adb = new Adb(device);
+		this.adb = adb;
 	}
 
-	public void sendRaw(String ... arguments) throws UiMultimatorException {
-		try {
-			adb.sendAdbCommand(new DummyParser(), arguments);
-		} catch (AdbException e) {
-			throw new UiMultimatorException("Could not run raw command", e);
-		}		
-	}
-	
 	public void run(String classname, String methodname) throws UiMultimatorException
 	{
 		try {

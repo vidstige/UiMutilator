@@ -84,6 +84,11 @@ public class Adb {
 		sendAdbCommand(parser, Arrays.asList(arguments));
 	}
 	
+	public void sendAdbCommand(String ... arguments) throws AdbException 
+	{
+		sendAdbCommand(true, Arrays.asList(arguments));
+	}
+	
 	public InputStream sendAdbCommand(boolean parseErrors, String ... arguments) throws AdbException
 	{
 		return sendAdbCommand(parseErrors, Arrays.asList(arguments));
