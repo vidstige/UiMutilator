@@ -19,20 +19,16 @@ public class UiSelectorFactory {
 	private static final String STRING = "s;";
 
 	private static Object getParameterAsObject(String value) {
-		if(value == null) {
-			return -1;
-		}
+		if(value == null) throw new IllegalArgumentException("value cannot be null");
 
-		Object param = null;
 		if(value.startsWith(INTEGER)) {
-			param = Integer.parseInt(value.substring(2));
+			return Integer.parseInt(value.substring(INTEGER.length()));
 		} else if(value.startsWith(BOOLEAN)) {
-			param = Boolean.parseBoolean(value.substring(2));
+			return Boolean.parseBoolean(value.substring(BOOLEAN.length()));
 		} else if(value.startsWith(STRING)) {
-			param = value.substring(2);
+			return value.substring(STRING.length());
 		}
-
-		return param;
+		throw new IllegalArgumentException("Could not parse value as parameter: " + value); 
 	}
 
 	private static Method getUiSelectorMethod(String name) {
