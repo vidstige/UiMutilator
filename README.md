@@ -28,5 +28,14 @@ This is an example of a *UiMultimator* test
 		Assert.assertEquals("Sound", sound.getText());
 	}
 
+## Building ##
+To build the 'uimultimator.jar' from source file follow the following instructions.
+
+* Build the ant file 'command-tests/build.xml' with tharget 'build'.
+* Build the classes in the src folder.
+* export alla class files generated from the sources in the src folder and, this is important, also export the command-tests/bin/command-tests.jar.
+
+This can be done easily in for example Eclipse. There is also a test suite containing a few demonstration tests inside the test source folder.
+
 ## Author ##
 Created by Samuel Carlsson <samuel.carlsson@gmail.com>
