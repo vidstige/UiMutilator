@@ -16,7 +16,7 @@ public class UiMultimatorTestCase {
 	{
 		public UiDevice any() throws UiMultimatorException
 		{
-			return new UiDevice(null);		
+			return new UiDevice(AdbDevice.any());		
 		}
 		
 		public UiDevice number(int n) throws UiMultimatorException
@@ -27,7 +27,7 @@ public class UiMultimatorTestCase {
 				List<AdbDevice> devices = new Adb().getDevices();
 				if (n >= devices.size())
 					throw new UiMultimatorException("Could not connect to device " + n + ", only " + devices.size() + " connected");
-				return new UiDevice(devices.get(n).getSerial());
+				return new UiDevice(devices.get(n));
 			}
 			catch (AdbException e)
 			{
@@ -37,7 +37,7 @@ public class UiMultimatorTestCase {
 		
 		public UiDevice withSerial(String serial) throws UiMultimatorException
 		{
-			return new UiDevice(serial);		
+			return new UiDevice(new AdbDevice(serial));		
 		}
 
 		public UiDevice first() throws UiMultimatorException {

@@ -8,15 +8,16 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import se.vidstige.android.adb.Adb;
+import se.vidstige.android.adb.AdbDevice;
 import se.vidstige.android.adb.AdbException;
 
 class UiAutomatorRunner {
 	private final Adb adb;
 	private final String jarfile;
 
-	public UiAutomatorRunner(String serial, String jarfile) {
+	public UiAutomatorRunner(AdbDevice device, String jarfile) {
 		this.jarfile = jarfile;
-		adb = new Adb(serial);
+		adb = new Adb(device);
 	}
 
 	public void sendRaw(String ... arguments) throws UiMultimatorException {

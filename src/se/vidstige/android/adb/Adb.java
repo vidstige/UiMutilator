@@ -10,13 +10,13 @@ import java.util.List;
 
 public class Adb {
 	
-	private String serial;
+	private AdbDevice device;
 
-	public Adb() { this(null); }
+	public Adb() { this(AdbDevice.any()); }
 	
-	public Adb(String serial)
+	public Adb(AdbDevice device)
 	{
-		this.serial = serial;		
+		this.device = device;		
 	}
 	
 	public List<AdbDevice> getDevices() throws AdbException
@@ -59,10 +59,10 @@ public class Adb {
 		{
 			List<String> command_and_arguments = new ArrayList<String>(arguments);
 			command_and_arguments.add(0, android_home + "/platform-tools/adb");
-			if (serial != null)
+			if (device != AdbDevice.any())
 			{
 				command_and_arguments.add(1, "-s");
-				command_and_arguments.add(2, serial);
+				command_and_arguments.add(2, device.getSerial());
 			}
 			ProcessBuilder processBuilder = new ProcessBuilder(command_and_arguments);
 						
@@ -99,10 +99,10 @@ public class Adb {
 		{
 			List<String> command_and_arguments = new ArrayList<String>(arguments);
 			command_and_arguments.add(0, android_home + "/platform-tools/adb");
-			if (serial != null)
+			if (device != AdbDevice.any())
 			{
 				command_and_arguments.add(1, "-s");
-				command_and_arguments.add(2, serial);
+				command_and_arguments.add(2, device.getSerial());
 			}
 			ProcessBuilder processBuilder = new ProcessBuilder(command_and_arguments);
 						

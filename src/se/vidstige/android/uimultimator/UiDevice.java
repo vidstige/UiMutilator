@@ -8,15 +8,16 @@ import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
+import se.vidstige.android.adb.AdbDevice;
 
 public class UiDevice {
 
 	private final UiAutomatorRunner runner;
 	
-	UiDevice(String serial) throws UiMultimatorException {
+	UiDevice(AdbDevice device) throws UiMultimatorException {
 		try
-		{			
-			runner = new UiAutomatorRunner(serial, "command-tests.jar");
+		{
+			runner = new UiAutomatorRunner(device, "command-tests.jar");
 			
 			String deluxJar = null;
 			InputStream input = getClass().getResourceAsStream("command-tests/bin/command-tests.jar");
