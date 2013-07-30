@@ -95,6 +95,12 @@ public class UiDevice {
 		return Integer.parseInt(result);
 	}
 	
+	public String getLastTraversedText() throws UiMultimatorException
+	{
+		String result = runTest("testGetLastTraversedText", new HashMap<String, String>(0));
+		return result;
+	}
+	
 	public boolean isScreenOn() throws UiMultimatorException
 	{
 		String result = runTest("testIsScreenOn", new HashMap<String, String>(0));
