@@ -14,18 +14,9 @@ import com.android.uiautomator.core.UiSelector;
  */
 public class UiSelectorFactory {
 
-	//Not used--using reflection to get all possible methods
-	private static final String[] UISELECTOR_METHODS = {"checkable", "checked", "childSelector", "className",
-			"className", "classNameMatches", "clickable", "description", "descriptionContains",
-			"descriptionMatches", "descriptionStartsWith", "enabled", "focusable", "focused",
-			"index", "instance", "longClickable", "packageName", "packageNameMatches", "resourceId",
-			"resourceIdMatches", "scrollable", "selected", "text", "textContains", "textMatches",
-			"textStartsWith" };
-
 	private static final String INTEGER = "i;";
 	private static final String BOOLEAN = "b;";
 	private static final String STRING = "s;";
-
 
 	private static Object getParameterAsObject(String value) {
 		if(value == null) {
