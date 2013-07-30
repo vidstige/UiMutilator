@@ -30,6 +30,11 @@ public class UiDeviceCommands extends UiCommandsTestCase {
 		respond(getUiDevice().getDisplayRotation());
 	}
 	
+	public void testGetLastTraversedText()
+	{
+		respond(getUiDevice().getLastTraversedText());
+	}
+	
 	public void testIsScreenOn() throws RemoteException
 	{
 		respond(getUiDevice().isScreenOn());
@@ -52,7 +57,7 @@ public class UiDeviceCommands extends UiCommandsTestCase {
 	}
 	
 	public void testSleep() throws RemoteException {
-		getUiDevice().sleep();	
+		getUiDevice().sleep();
 	}
 
 	public void testWakeUp() throws RemoteException {

@@ -1,33 +1,33 @@
 package se.vidstige.android.uimultimator;
 
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
+import java.lang.reflect.InvocationTargetException;
+
+import android.os.Bundle;
 
 import com.android.uiautomator.core.UiSelector;
 import com.android.uiautomator.testrunner.UiAutomatorTestCase;
 
 public class UiCommandsTestCase extends UiAutomatorTestCase {
-	
+
 	protected int getInt(String name)	{
 		return Integer.parseInt(getParams().getString(name));	
 	}
-	
+
 	protected UiSelector recreateSelector() throws UnsupportedEncodingException	{
-		String selector_type = getParams().getString("selector_type");
-		String p = URLDecoder.decode(getParams().getString("selector_parameter"), "utf-8");
-		if ("text".equals(selector_type))
-		{
-			return new UiSelector().text(p);
+
+		Bundle bundle = getParams();
+
+		UiSelector selector = null;
+		try {
+			selector = UiSelectorFactory.getUiSelector(bundle);
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			e.printStackTrace();
 		}
-		else if ("classNameMatches".equals(selector_type))
-		{
-			return new UiSelector().classNameMatches(p);
-		}
-		else if ("className".equals(selector_type))
-		{
-			return new UiSelector().className(p);
-		}
-		throw new IllegalStateException("Could not deserialize UiSelector of type " + selector_type);
+		
+		return selector;
 	}
 	
 	protected void respond(String response)	{
