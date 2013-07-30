@@ -8,7 +8,9 @@ import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
+import se.vidstige.android.adb.Adb;
 import se.vidstige.android.adb.AdbDevice;
+import se.vidstige.android.adb.AdbException;
 
 public class UiDevice {
 
@@ -19,11 +21,11 @@ public class UiDevice {
 		{
 			runner = new UiAutomatorRunner(device, "command-tests.jar");
 			
-			String deluxJar = null;
+			File deluxJar = null;
 			InputStream input = getClass().getResourceAsStream("command-tests/bin/command-tests.jar");
 			if (input == null)
 			{
-				deluxJar = System.getProperty("user.dir") + "/command-tests/bin/command-tests.jar";
+				deluxJar = new File(System.getProperty("user.dir") + "/command-tests/bin/command-tests.jar");
 			}
 			else
 			{			
@@ -36,11 +38,12 @@ public class UiDevice {
 			
 			if (deluxJar == null) throw new IllegalStateException("Could not find command-tests.jar in jar-file");
 		
-			runner.sendRaw("push", deluxJar, "/data/local/tmp/command-tests.jar");
+			new Adb(device).push(deluxJar, "/data/local/tmp/command-tests.jar");
 		}
-		catch (IOException e)
-		{
+		catch (IOException e) {
 			throw new UiMultimatorException("Could not create UiDevice", e);			
+		} catch (AdbException e) {
+			throw new UiMultimatorException("Could not create UiDevice", e);
 		}
 	}
 	

@@ -1,6 +1,7 @@
 package se.vidstige.android.adb;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -23,7 +24,7 @@ public class Adb {
 	{
 		try
 		{
-			InputStream adbOutput = sendAdbCommand("devices");
+			InputStream adbOutput = sendAdbCommand(true, "devices");
 			BufferedReader input = new BufferedReader(new InputStreamReader(adbOutput));
 			return parseDevices(input);
 		}
@@ -83,12 +84,12 @@ public class Adb {
 		sendAdbCommand(parser, Arrays.asList(arguments));
 	}
 	
-	public InputStream sendAdbCommand(String ... arguments) throws AdbException
+	public InputStream sendAdbCommand(boolean parseErrors, String ... arguments) throws AdbException
 	{
-		return sendAdbCommand(arguments);
+		return sendAdbCommand(parseErrors, Arrays.asList(arguments));
 	}
 	
-	public InputStream sendAdbCommand(List<String> arguments) throws AdbException
+	public InputStream sendAdbCommand(boolean parserErrors, List<String> arguments) throws AdbException
 	{
 		if (arguments == null) throw new IllegalArgumentException("arguments cannot be null");
 		
@@ -107,7 +108,9 @@ public class Adb {
 			ProcessBuilder processBuilder = new ProcessBuilder(command_and_arguments);
 						
 			Process p = processBuilder.start();
-			parseErrors(new BufferedReader(new InputStreamReader(p.getErrorStream())));
+			if (parserErrors) {
+				parseErrors(new BufferedReader(new InputStreamReader(p.getErrorStream())));
+			}
 			return p.getInputStream();
 		}
 		catch (IOException e)
@@ -122,5 +125,9 @@ public class Adb {
 		{
 			throw new AdbException(line);
 		}
+	}
+
+	public void push(File localFile, String remotePath) throws AdbException {
+		sendAdbCommand(false, "push", localFile.getPath(), remotePath);
 	}
 }
