@@ -6,12 +6,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class AdbDevice {
+public class Adb {
 	
 	private String serial;
 
-	public AdbDevice() { this(null); }
-	public AdbDevice(String serial)
+	public Adb() { this(null); }
+	public Adb(String serial)
 	{
 		this.serial = serial;		
 	}

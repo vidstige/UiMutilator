@@ -7,16 +7,16 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import se.vidstige.android.adb.AdbDevice;
+import se.vidstige.android.adb.Adb;
 import se.vidstige.android.adb.AdbException;
 
 class UiAutomatorRunner {
-	private final AdbDevice adb;
+	private final Adb adb;
 	private final String jarfile;
 
 	public UiAutomatorRunner(String serial, String jarfile) {
 		this.jarfile = jarfile;
-		adb = new AdbDevice(serial);
+		adb = new Adb(serial);
 	}
 
 	public void sendRaw(String ... arguments) throws UiMultimatorException {
