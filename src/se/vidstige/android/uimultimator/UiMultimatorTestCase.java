@@ -1,5 +1,8 @@
 package se.vidstige.android.uimultimator;
 
+import se.vidstige.android.adb.AdbDevice;
+import se.vidstige.android.adb.AdbException;
+
 public class UiMultimatorTestCase {
 
 	protected UiDeviceFluentBuilder getUiDevice() throws UiMultimatorException {

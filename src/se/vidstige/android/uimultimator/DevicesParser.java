@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import se.vidstige.android.adb.AdbException;
+import se.vidstige.android.adb.StreamParser;
+
 public class DevicesParser implements StreamParser {
 	private List<String> deviceSerials = new ArrayList<String>();
 	

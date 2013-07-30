@@ -7,6 +7,9 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import se.vidstige.android.adb.AdbDevice;
+import se.vidstige.android.adb.AdbException;
+
 class UiAutomatorRunner {
 	private final AdbDevice adb;
 	private final String jarfile;

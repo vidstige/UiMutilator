@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import se.vidstige.android.adb.StreamParser;
+
 class ReadTestParser implements StreamParser{
 
 	private static final String INSTRUMENTATION_STATUS = "INSTRUMENTATION_STATUS: ";
@@ -31,7 +33,7 @@ class ReadTestParser implements StreamParser{
 		response = null;
 		while ((line = input.readLine()) != null)
 		{
-			//System.out.println("line: " + line);
+			System.out.println("line: " + line);
 			
 			if (line.startsWith(INSTRUMENTATION_STATUS))
 			{

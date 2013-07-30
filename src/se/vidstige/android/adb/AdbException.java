@@ -1,6 +1,6 @@
-package se.vidstige.android.uimultimator;
+package se.vidstige.android.adb;
 
-class AdbException extends Exception {
+public class AdbException extends Exception {
 
 	private static final long serialVersionUID = 3979090287953441057L;
 	

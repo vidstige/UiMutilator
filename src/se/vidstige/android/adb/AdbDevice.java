@@ -1,4 +1,4 @@
-package se.vidstige.android.uimultimator;
+package se.vidstige.android.adb;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-class AdbDevice {
+public class AdbDevice {
 	
 	private String serial;
 
