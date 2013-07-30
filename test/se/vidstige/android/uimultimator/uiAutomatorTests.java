@@ -7,6 +7,8 @@ import junit.framework.Assert;
 
 import org.testng.annotations.Test;
 
+import android.widget.TextView;
+
 public class uiAutomatorTests extends UiMultimatorTestCase {  
 	@Test(expectedExceptions=UiMultimatorException.class, expectedExceptionsMessageRegExp="UiObject not found: UiSelector\\[TEXT=notFound\\]")
 	public void testUiSelectorThatWillThrow() throws Exception {
@@ -24,11 +26,14 @@ public class uiAutomatorTests extends UiMultimatorTestCase {
 		uiDevice.pressHome();
 		uiDevice.pressMenu();
 		
-		UiObject settingsOption = uiDevice.newUiObject(new UiSelector().text("System settings"));
+		UiObject settingsOption = uiDevice.newUiObject(new UiSelector().text("System settings").className(TextView.class));
 		settingsOption.clickAndWaitForNewWindow();
 		
 		UiObject sound = uiDevice.newUiObject(new UiSelector().text("Sound"));
 		Assert.assertEquals("Sound", sound.getText());
+		
+		UiObject battery = uiDevice.newUiObject(new UiSelector().text("Battery"));
+		Assert.assertEquals("Battery", battery.getText());
 	}
 	
 	@Test
