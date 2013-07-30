@@ -15,7 +15,7 @@ public class UiDevice {
 	
 	UiDevice(String serial) throws UiMultimatorException {
 		try
-		{
+		{			
 			runner = new UiAutomatorRunner(serial, "command-tests.jar");
 			
 			String deluxJar = null;

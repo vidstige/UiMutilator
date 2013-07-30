@@ -1,6 +1,8 @@
 package se.vidstige.android.adb;
 
 import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,9 +13,38 @@ public class Adb {
 	private String serial;
 
 	public Adb() { this(null); }
+	
 	public Adb(String serial)
 	{
 		this.serial = serial;		
+	}
+	
+	public List<AdbDevice> getDevices() throws AdbException
+	{
+		try
+		{
+			InputStream adbOutput = sendAdbCommand("devices");
+			BufferedReader input = new BufferedReader(new InputStreamReader(adbOutput));
+			return parseDevices(input);
+		}
+		catch (IOException e)
+		{
+			throw new AdbException("Could not list adb devices", e);			
+		}
+	}
+	
+	private List<AdbDevice> parseDevices(BufferedReader input) throws IOException
+	{
+		List<AdbDevice> devices = new ArrayList<AdbDevice>(2);
+		String line;
+		while ((line = input.readLine()) != null) {
+			String[] parts = line.split("\t");
+			if (parts.length >= 2)
+			{
+				devices.add(new AdbDevice(parts[0]));
+			}
+		}
+		return devices;
 	}
 	
 	public void sendAdbCommand(StreamParser parser, List<String> arguments) throws AdbException
@@ -50,5 +81,46 @@ public class Adb {
 	public void sendAdbCommand(StreamParser parser, String ... arguments) throws AdbException 
 	{
 		sendAdbCommand(parser, Arrays.asList(arguments));
+	}
+	
+	public InputStream sendAdbCommand(String ... arguments) throws AdbException
+	{
+		return sendAdbCommand(arguments);
+	}
+	
+	public InputStream sendAdbCommand(List<String> arguments) throws AdbException
+	{
+		if (arguments == null) throw new IllegalArgumentException("arguments cannot be null");
+		
+		String android_home = System.getenv("ANDROID_HOME");
+		if (android_home == null) throw new AdbException("Environment variable ANDROID_HOME not set");
+		
+		try
+		{
+			List<String> command_and_arguments = new ArrayList<String>(arguments);
+			command_and_arguments.add(0, android_home + "/platform-tools/adb");
+			if (serial != null)
+			{
+				command_and_arguments.add(1, "-s");
+				command_and_arguments.add(2, serial);
+			}
+			ProcessBuilder processBuilder = new ProcessBuilder(command_and_arguments);
+						
+			Process p = processBuilder.start();
+			parseErrors(new BufferedReader(new InputStreamReader(p.getErrorStream())));
+			return p.getInputStream();
+		}
+		catch (IOException e)
+		{
+			throw new AdbException("Could not send adb command", e);
+		}
+	}
+
+	private void parseErrors(BufferedReader input) throws AdbException, IOException {
+		String line;
+		while ((line = input.readLine()) != null)			
+		{
+			throw new AdbException(line);
+		}
 	}
 }
