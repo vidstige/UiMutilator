@@ -54,9 +54,9 @@ public class UiDevice {
 		try
 		{
 			String tmpfile = "/data/local/tmp/screen-capture.png";
-			adb.sendAdbCommand("shell", "screencap", "-p", tmpfile);
-			adb.sendAdbCommand(false, "pull", tmpfile, destination.getPath()); // ignore errors as pull prints transfer rates to stderr
-			adb.sendAdbCommand("shell", "rm", tmpfile);
+			adb.sendCommand("shell", "screencap", "-p", tmpfile);
+			adb.sendCommand(false, "pull", tmpfile, destination.getPath()); // ignore errors as pull prints transfer rates to stderr
+			adb.sendCommand("shell", "rm", tmpfile);
 		}
 		catch (AdbException e)
 		{

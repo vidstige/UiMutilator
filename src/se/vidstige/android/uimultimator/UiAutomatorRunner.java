@@ -37,7 +37,7 @@ class UiAutomatorRunner {
 				arguments.add(URLEncoder.encode(entry.getValue(), "utf-8"));
 			}
 			
-			InputStream adbOutput = adb.sendAdbCommand(true, arguments);
+			InputStream adbOutput = adb.sendCommand(true, arguments);
 			BufferedReader input = new BufferedReader(new InputStreamReader(adbOutput));
 			
 			String result = parseTests(input, classname, methodname);

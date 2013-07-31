@@ -24,7 +24,7 @@ public class Adb {
 	{
 		try
 		{
-			InputStream adbOutput = sendAdbCommand(true, "devices");
+			InputStream adbOutput = sendCommand(true, "devices");
 			BufferedReader input = new BufferedReader(new InputStreamReader(adbOutput));
 			return parseDevices(input);
 		}
@@ -48,17 +48,17 @@ public class Adb {
 		return devices;
 	}
 	
-	public void sendAdbCommand(String ... arguments) throws AdbException 
+	public void sendCommand(String ... arguments) throws AdbException 
 	{
-		sendAdbCommand(true, Arrays.asList(arguments));
+		sendCommand(true, Arrays.asList(arguments));
 	}
 	
-	public InputStream sendAdbCommand(boolean parseErrors, String ... arguments) throws AdbException
+	public InputStream sendCommand(boolean parseErrors, String ... arguments) throws AdbException
 	{
-		return sendAdbCommand(parseErrors, Arrays.asList(arguments));
+		return sendCommand(parseErrors, Arrays.asList(arguments));
 	}
 	
-	public InputStream sendAdbCommand(boolean parserErrors, List<String> arguments) throws AdbException
+	public InputStream sendCommand(boolean parserErrors, List<String> arguments) throws AdbException
 	{
 		if (arguments == null) throw new IllegalArgumentException("arguments cannot be null");
 		
@@ -97,6 +97,6 @@ public class Adb {
 	}
 
 	public void push(File localFile, String remotePath) throws AdbException {
-		sendAdbCommand(false, "push", localFile.getPath(), remotePath);
+		sendCommand(false, "push", localFile.getPath(), remotePath);
 	}
 }
