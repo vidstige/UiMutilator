@@ -19,18 +19,6 @@ class UiAutomatorRunner {
 		this.adb = adb;
 	}
 
-	public void run(String classname, String methodname) throws UiMultimatorException
-	{
-		try {
-			ReadTestParser parser = new ReadTestParser(classname, methodname);
-			adb.sendAdbCommand(parser, "shell", "uiautomator", "runtest", jarfile,
-					"-c", classname + "#" + methodname);
-			parser.verify();
-		} catch (AdbException e) {
-			throw new UiMultimatorException("Could not run uiautomator test: " + classname + "#" + methodname, e);
-		}
-	}
-
 	public String run(String classname, String methodname, Map<String, String> parameters) throws UiMultimatorException {
 		try
 		{

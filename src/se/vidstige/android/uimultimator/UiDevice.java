@@ -156,7 +156,7 @@ public class UiDevice {
 	}
 	
 	private void runTest(String methodname) throws UiMultimatorException {
-		runner.run("se.vidstige.android.uimultimator.UiDeviceCommands", methodname);
+		runner.run("se.vidstige.android.uimultimator.UiDeviceCommands", methodname, new HashMap<String, String>(0));
 	}
 
 	private static void copy(InputStream input, OutputStream out) throws IOException {
