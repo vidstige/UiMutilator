@@ -65,4 +65,8 @@ public class UiObject {
 	public void clearTextField() throws IOException, InterruptedException, UiMultimatorException {
 		run("testClearTextField");
 	}
+	
+	public boolean exists() throws UiMultimatorException {
+		return runBool("testExists");
+	}
 }

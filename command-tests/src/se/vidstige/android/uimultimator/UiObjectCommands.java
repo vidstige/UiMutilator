@@ -49,4 +49,8 @@ public class UiObjectCommands extends UiCommandsTestCase {
 		String text = uiObject().getText();
 		respond(text);
 	}
+	
+	public void testExists() throws UnsupportedEncodingException {
+		respond(uiObject().exists());
+	}
 }
