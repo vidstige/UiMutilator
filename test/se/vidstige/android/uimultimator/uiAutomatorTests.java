@@ -72,4 +72,18 @@ public class uiAutomatorTests extends UiMultimatorTestCase {
 		UiObject messagingButton = uiDevice.newUiObject(new UiSelector().text("Messaging"));
 		messagingButton.click();
 	}
+	
+	@Test
+	public void testScrollable()
+	{
+//		a.pressHome();
+//		a.pressHome();
+//		a.pressMenu();
+//		uiObjectWithText(a, new String[] { "System settings", "Settings" }).clickAndWaitForNewWindow();		
+//		
+//		UiScrollable settingsList = new UiScrollable(new UiSelector().scrollable(true));
+//		UiSelector appManagerText = new UiSelector().textContains("App");
+//		settingsList.scrollIntoView(appManagerText);
+//		settingsList.getChild(appManagerText).clickAndWaitForNewWindow();
+	}
 }
