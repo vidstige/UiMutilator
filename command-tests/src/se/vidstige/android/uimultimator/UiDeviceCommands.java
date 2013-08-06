@@ -72,4 +72,9 @@ public class UiDeviceCommands extends UiCommandsTestCase {
 	{
 		getUiDevice().waitForIdle();
 	}
+
+	public void testWaitForIdleTimeout()
+	{
+		getUiDevice().waitForIdle(getInt("timeout"));
+	}
 }

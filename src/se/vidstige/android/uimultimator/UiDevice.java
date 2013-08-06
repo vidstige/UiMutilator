@@ -140,6 +140,13 @@ public class UiDevice {
 	{
 		runTest("testWaitForIdle");
 	}
+
+	public void waitForIdle(int timeout) throws UiMultimatorException
+	{
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put("timeout", Integer.toString(timeout));
+		runTest("testWaitForIdleTimeout", parameters);
+	}
 	
 	public void swipe(int startX, int startY, int endX, int endY, int steps) throws UiMultimatorException {
 		Map<String, String> parameters = new HashMap<String, String>();
