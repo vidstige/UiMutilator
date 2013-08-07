@@ -1,11 +1,18 @@
 package se.vidstige.android.uimultimator;
 
+import java.io.UnsupportedEncodingException;
+
+import com.android.uiautomator.core.UiObjectNotFoundException;
 import com.android.uiautomator.core.UiScrollable;
+import com.android.uiautomator.core.UiSelector;
 
 public class UiScrollableCommands extends UiCommandsTestCase {
-	UiScrollable uiScrollable()
+	
+	public void testScrollIntoView() throws UnsupportedEncodingException, UiObjectNotFoundException
 	{
-		//return new UiScrollable(recreateSelector());
-		return null;
+		UiSelector s0 = recreateSelector("0");
+		UiScrollable scrollable = new UiScrollable(s0);
+		UiSelector s1 = recreateSelector("1");
+		scrollable.scrollIntoView(s1);
 	}
 }

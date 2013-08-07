@@ -12,14 +12,11 @@ public class UiScrollable {
 		this.selector = selector;
 	}
 	
-	private String run(String methodname) throws UiMultimatorException {
+	public void scrollIntoView(UiSelector selector) throws UiMultimatorException {
 		Map<String, String> parameters = new HashMap<String, String>(); 
-		selector.serializeTo(parameters, "s0_");
-		return runner.run("se.vidstige.android.uimultimator.UiScrollableCommands", methodname, parameters);
-	}
-
-	public void scrollIntoView(UiSelector selector) {
-		//this.selector.getParameters("s0_");
+		this.selector.serializeTo(parameters, "s0_");
+		selector.serializeTo(parameters, "s1_");
+		runner.run("se.vidstige.android.uimultimator.UiScrollableCommands", "testScrollIntoView", parameters);
 	}
 
 	public UiObject getChild(UiSelector selector) {

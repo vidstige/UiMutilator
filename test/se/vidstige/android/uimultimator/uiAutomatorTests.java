@@ -74,16 +74,18 @@ public class uiAutomatorTests extends UiMultimatorTestCase {
 	}
 	
 	@Test
-	public void testScrollable()
+	public void testScrollable() throws UiMultimatorException
 	{
-//		a.pressHome();
-//		a.pressHome();
-//		a.pressMenu();
-//		uiObjectWithText(a, new String[] { "System settings", "Settings" }).clickAndWaitForNewWindow();		
-//		
-//		UiScrollable settingsList = new UiScrollable(new UiSelector().scrollable(true));
-//		UiSelector appManagerText = new UiSelector().textContains("App");
-//		settingsList.scrollIntoView(appManagerText);
-//		settingsList.getChild(appManagerText).clickAndWaitForNewWindow();
+		UiDevice a = getUiDevice().first();
+		a.pressHome();
+		a.pressHome();
+		a.pressMenu();
+
+		a.newUiObject(new UiSelector().text("System settings")).clickAndWaitForNewWindow();
+		
+		UiScrollable settingsList = a.newUiScrollable(new UiSelector().scrollable(true));
+		UiSelector appManagerText = new UiSelector().textContains("Date & time");
+		settingsList.scrollIntoView(appManagerText);
+		//settingsList.getChild(appManagerText).clickAndWaitForNewWindow();
 	}
 }
