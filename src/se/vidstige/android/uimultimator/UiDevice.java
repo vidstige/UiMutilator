@@ -67,6 +67,10 @@ public class UiDevice {
 	public UiObject newUiObject(UiSelector selector) {
 		return new UiObject(runner, selector);
 	}
+	
+	public UiScrollable newUiScrollable(UiSelector selector) {
+		return new UiScrollable(runner, selector);
+	}
 
 	public void pressHome() throws UiMultimatorException {
 		runTest("testPressHome");

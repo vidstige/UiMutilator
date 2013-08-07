@@ -2,6 +2,7 @@ package se.vidstige.android.uimultimator;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 public class UiSelector {
 
@@ -146,22 +147,12 @@ public class UiSelector {
 		parameters.put("textStartsWith", "s;"+text);
 		return this;
 	}
-
-
-
-
-
-
-
-
-
-
-	Map<String, String> getParameters() {
+	
+	Map<String, String> getParameters(String prefix) {
+		Map<String, String> result = new HashMap<String, String>();
+		for(Entry<String, String> entry: parameters.entrySet()) {
+			result.put(prefix + entry.getKey(), entry.getValue());			
+		}
 		return parameters;
 	}
-
-//	void serializeTo(Map<String, String> parameters) {
-//		parameters.put("selector_type", type);
-//		parameters.put("selector_parameter", parameter);
-//	}
 }

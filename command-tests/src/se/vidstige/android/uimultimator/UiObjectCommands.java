@@ -8,7 +8,7 @@ import com.android.uiautomator.core.UiObjectNotFoundException;
 public class UiObjectCommands extends UiCommandsTestCase {
 
 	private UiObject uiObject() throws UnsupportedEncodingException {
-		return new UiObject(recreateSelector());
+		return new UiObject(recreateSelector("0"));
 	}
 	
 	public void testClick() throws UiObjectNotFoundException, UnsupportedEncodingException {

@@ -38,18 +38,29 @@ public class UiSelectorFactory {
 				return method;
 			}
 		}
-		return null;
+		throw new IllegalArgumentException("No such method");
 	}
 
-	public static UiSelector getUiSelector(Bundle bundle) throws InvocationTargetException, IllegalAccessException, IllegalArgumentException, UnsupportedEncodingException {
+	public static UiSelector getUiSelector(Bundle bundle, String selectorId) throws InvocationTargetException, IllegalAccessException, IllegalArgumentException, UnsupportedEncodingException {
 
 		UiSelector selector = new UiSelector();
 		boolean atLeastOneMethodFound = false;
 
 		for(String key : bundle.keySet()) {
-
-			Method method = getUiSelectorMethod(key);
-			if(method != null) {
+			
+			String methodName = null;
+			if (key.startsWith("s") && key.contains("_"))
+			{
+				int idx = key.indexOf('_');
+				String id = key.substring("s".length(), idx - 1);
+				if (id.equals(selectorId))
+				{
+					methodName = key.substring(idx + 1);
+				}
+			}
+			
+			if(methodName != null) {
+				Method method = getUiSelectorMethod(methodName);				
 
 				String value = URLDecoder.decode(bundle.getString(key), "utf-8");
 				Object param = getParameterAsObject(value);

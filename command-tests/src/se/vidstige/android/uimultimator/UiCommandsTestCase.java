@@ -14,13 +14,13 @@ public class UiCommandsTestCase extends UiAutomatorTestCase {
 		return Integer.parseInt(getParams().getString(name));	
 	}
 
-	protected UiSelector recreateSelector() throws UnsupportedEncodingException	{
+	protected UiSelector recreateSelector(String selectorId) throws UnsupportedEncodingException	{
 
 		Bundle bundle = getParams();
 
 		UiSelector selector = null;
 		try {
-			selector = UiSelectorFactory.getUiSelector(bundle);
+			selector = UiSelectorFactory.getUiSelector(bundle, selectorId);
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();
 		} catch (InvocationTargetException e) {

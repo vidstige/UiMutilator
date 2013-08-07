@@ -1,6 +1,5 @@
 package se.vidstige.android.uimultimator;
 
-import java.io.IOException;
 import java.util.Map;
 
 public class UiObject {
@@ -13,7 +12,7 @@ public class UiObject {
 	}
 
 	private String run(String methodname) throws UiMultimatorException {
-		Map<String, String> parameters = selector.getParameters();
+		Map<String, String> parameters = selector.getParameters("s0_");
 		return runner.run("se.vidstige.android.uimultimator.UiObjectCommands", methodname, parameters);
 	}
 	
@@ -42,17 +41,16 @@ public class UiObject {
 		return runBool("testIsEnabled");
 	}
 	
-	public void clickAndWaitForNewWindow() throws IOException, InterruptedException, UiMultimatorException {
+	public void clickAndWaitForNewWindow() throws UiMultimatorException {
 		run("testClickAndWaitForNewWindow");
 	}
 
-	public String getText() throws IOException, InterruptedException, UiMultimatorException {
+	public String getText() throws UiMultimatorException {
 		return run("testGetText");
 	}
 
-	public void setText(String text) throws IOException, InterruptedException, UiMultimatorException {
-		Map<String, String> parameters = selector.getParameters();
-
+	public void setText(String text) throws UiMultimatorException {
+		Map<String, String> parameters = selector.getParameters("s0_");
 		
 		parameters.put("set_text", text);
 		
@@ -62,7 +60,7 @@ public class UiObject {
 				parameters);	
 	}
 
-	public void clearTextField() throws IOException, InterruptedException, UiMultimatorException {
+	public void clearTextField() throws UiMultimatorException {
 		run("testClearTextField");
 	}
 	
