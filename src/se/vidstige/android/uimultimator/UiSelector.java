@@ -6,15 +6,15 @@ import java.util.Map.Entry;
 
 public class UiSelector {
 
-	private Map<String, String> parameters = new HashMap<String, String>();
+	private Map<String, String> methods = new HashMap<String, String>();
 
 	public UiSelector checkable(boolean val) {
-		parameters.put("checkable", "b;"+val);
+		methods.put("checkable", "b;"+val);
 		return this;
 	}
 
 	public UiSelector checked(boolean val) {
-		parameters.put("checked", "b;"+val);
+		methods.put("checked", "b;"+val);
 		return this;
 	}
 
@@ -24,57 +24,57 @@ public class UiSelector {
 //	}
 
 	public UiSelector className(String className) {
-		parameters.put("className", "s;"+className);
+		methods.put("className", "s;"+className);
 		return this;
 	}
 
 	public <T> UiSelector className(Class<T> type) {
-		parameters.put("className", "s;"+type.getName());
+		methods.put("className", "s;"+type.getName());
 		return this;
 	}
 
 	public UiSelector classNameMatches(String regex) {
-		parameters.put("classNameMatches", "s;"+regex);
+		methods.put("classNameMatches", "s;"+regex);
 		return this;
 	}
 
 	public UiSelector clickable(boolean val) {
-		parameters.put("clickable", "b;"+val);
+		methods.put("clickable", "b;"+val);
 		return this;
 	}
 
 	public UiSelector description(String desc) {
-		parameters.put("description", "s;"+desc);
+		methods.put("description", "s;"+desc);
 		return this;
 	}
 
 	public UiSelector descriptionContains(String desc) {
-		parameters.put("descriptionContains", "s;"+desc);
+		methods.put("descriptionContains", "s;"+desc);
 		return this;
 	}
 
 	public UiSelector descriptionMatches(String regex) {
-		parameters.put("descriptionMatches", "s;"+regex);
+		methods.put("descriptionMatches", "s;"+regex);
 		return this;
 	}
 
 	public UiSelector descriptionStartsWith(String desc) {
-		parameters.put("descriptionStartsWith", "s;"+desc);
+		methods.put("descriptionStartsWith", "s;"+desc);
 		return this;
 	}
 
 	public UiSelector enabled(boolean val) {
-		parameters.put("enabled", "b;"+val);
+		methods.put("enabled", "b;"+val);
 		return this;
 	}
 
 	public UiSelector focusable(boolean val) {
-		parameters.put("focusable", "b;"+val);
+		methods.put("focusable", "b;"+val);
 		return this;
 	}
 
 	public UiSelector focused(boolean val) {
-		parameters.put("focused", "b;"+val);
+		methods.put("focused", "b;"+val);
 		return this;
 	}
 
@@ -84,75 +84,73 @@ public class UiSelector {
 //	}
 
 	public UiSelector index(int index) {
-		parameters.put("index", "i;"+index);
+		methods.put("index", "i;"+index);
 		return this;
 	}
 
 	public UiSelector instance(int instance) {
-		parameters.put("instance", "i;"+instance);
+		methods.put("instance", "i;"+instance);
 		return this;
 	}
 
 	public UiSelector longClickable(boolean val) {
-		parameters.put("longClickable", "b;"+val);
+		methods.put("longClickable", "b;"+val);
 		return this;
 	}
 
 	public UiSelector packageName(String name) {
-		parameters.put("packageName", "s;"+name);
+		methods.put("packageName", "s;"+name);
 		return this;
 	}
 
 	public UiSelector packageNameMatches(String regex) {
-		parameters.put("packageNameMatches", "s;"+regex);
+		methods.put("packageNameMatches", "s;"+regex);
 		return this;
 	}
 
 	public UiSelector resourceId(String id) {
-		parameters.put("resourceId", "s;"+id);
+		methods.put("resourceId", "s;"+id);
 		return this;
 	}
 
 	public UiSelector resourceIdMatches(String regex) {
-		parameters.put("resourceIdMatches", "s;"+regex);
+		methods.put("resourceIdMatches", "s;"+regex);
 		return this;
 	}
 
 	public UiSelector scrollable(boolean val) {
-		parameters.put("scrollable", "b;"+val);
+		methods.put("scrollable", "b;"+val);
 		return this;
 	}
 
 	public UiSelector selected(boolean val) {
-		parameters.put("selected", "b;"+val);
+		methods.put("selected", "b;"+val);
 		return this;
 	}
 
 	public UiSelector text(String text) {
-		parameters.put("text", "s;"+text);
+		methods.put("text", "s;"+text);
 		return this;
 	}
 
 	public UiSelector textContains(String text) {
-		parameters.put("textContains", "s;"+text);
+		methods.put("textContains", "s;"+text);
 		return this;
 	}
 
 	public UiSelector textMatches(String regex) {
-		parameters.put("textMatches", "s;"+regex);
+		methods.put("textMatches", "s;"+regex);
 		return this;
 	}
 
 	public UiSelector textStartsWith(String text) {
-		parameters.put("textStartsWith", "s;"+text);
+		methods.put("textStartsWith", "s;"+text);
 		return this;
 	}
 	
-	Map<String, String> getParameters(String prefix) {
-		Map<String, String> result = new HashMap<String, String>();
-		for(Entry<String, String> entry: parameters.entrySet()) {
-			result.put(prefix + entry.getKey(), entry.getValue());			
+	void serializeTo(Map<String, String> parameters, String prefix) {
+		for(Entry<String, String> entry: methods.entrySet()) {
+			parameters.put(prefix + entry.getKey(), entry.getValue());			
 		}
-		return result;
 	}
 }

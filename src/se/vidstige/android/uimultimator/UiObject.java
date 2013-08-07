@@ -1,5 +1,6 @@
 package se.vidstige.android.uimultimator;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class UiObject {
@@ -12,7 +13,8 @@ public class UiObject {
 	}
 
 	private String run(String methodname) throws UiMultimatorException {
-		Map<String, String> parameters = selector.getParameters("s0_");
+		Map<String, String> parameters = new HashMap<String, String>();
+		selector.serializeTo(parameters, "s0_");
 		return runner.run("se.vidstige.android.uimultimator.UiObjectCommands", methodname, parameters);
 	}
 	
@@ -50,7 +52,8 @@ public class UiObject {
 	}
 
 	public void setText(String text) throws UiMultimatorException {
-		Map<String, String> parameters = selector.getParameters("s0_");
+		Map<String, String> parameters = new HashMap<String, String>();
+		selector.serializeTo(parameters, "s0_");
 		
 		parameters.put("set_text", text);
 		
