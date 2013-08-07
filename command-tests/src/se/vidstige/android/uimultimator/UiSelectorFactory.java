@@ -52,7 +52,9 @@ public class UiSelectorFactory {
 			if (key.startsWith("s") && key.contains("_"))
 			{
 				int idx = key.indexOf('_');
-				String id = key.substring("s".length(), idx - 1);
+				String id = key.substring("s".length(), idx);
+				System.out.println("selector: " + id);
+				System.out.println("target: " + selectorId);
 				if (id.equals(selectorId))
 				{
 					methodName = key.substring(idx + 1);

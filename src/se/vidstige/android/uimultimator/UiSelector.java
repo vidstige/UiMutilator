@@ -153,6 +153,6 @@ public class UiSelector {
 		for(Entry<String, String> entry: parameters.entrySet()) {
 			result.put(prefix + entry.getKey(), entry.getValue());			
 		}
-		return parameters;
+		return result;
 	}
 }
