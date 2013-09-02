@@ -1,5 +1,5 @@
 # UiMultimator #
-Introducing the *UiMultimator* - Android UI Testing on several devices that required interaction. Don't like jUnit? No problems, with *UiMultimator* you can use any test runner such as TestNG to drive the UI tests.
+Introducing the *UiMultimator* - Android UI Testing on several devices that requires interaction. Perfect for automating UI testing for apps that relies heavily on interaction, for example chat apps. Don't like jUnit? No problems, with *UiMultimator* you can use any test runner such as TestNG to drive the UI tests.
 
 The *UiMultimator* exposes a similar interface as the Android UiAutomator. However, this *UiMultimator* is capable of running on multiple devices.
 
@@ -38,4 +38,4 @@ To build the 'uimultimator.jar' from source file follow the following instructio
 This can be done easily in for example Eclipse. There is also a test suite containing a few demonstration tests inside the test source folder.
 
 ## Author ##
-Created by Samuel Carlsson <samuel.carlsson@gmail.com>
+Created by Samuel Carlsson <samuel.carlsson@gmail.com> & Johannes Elgh <johannes.elgh@gmail.com>
