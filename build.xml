@@ -10,7 +10,12 @@
         <javac srcdir="src" destdir="bin"/>
     </target>
 
-    <target name="jar" depends="compile">
+    <!-- Builds the command-tests.jar file used to actually run tests on device -->
+    <target name="command-tests">
+    	<ant dir="command-tests" antfile="build.xml" target="build"/>
+   	</target>
+    
+    <target name="jar" depends="compile,command-tests">
         <mkdir dir="build"/>
         <jar destfile="build/UiMultimator.jar" basedir="bin">
        		<fileset dir="." includes="command-tests/bin/command-tests.jar"/>
