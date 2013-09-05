@@ -12,7 +12,7 @@ public class UiScrollable {
 		this.selector = selector;
 	}
 	
-	public void scrollIntoView(UiSelector selector) throws UiMutilator {
+	public void scrollIntoView(UiSelector selector) throws UiMutilatorException {
 		Map<String, String> parameters = new HashMap<String, String>(); 
 		this.selector.serializeTo(parameters, "s0_");
 		selector.serializeTo(parameters, "s1_");

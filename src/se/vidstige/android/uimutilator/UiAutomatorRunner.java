@@ -25,7 +25,7 @@ class UiAutomatorRunner {
 		this.adb = adb;
 	}
 
-	public String run(String classname, String methodname, Map<String, String> parameters) throws UiMutilator {
+	public String run(String classname, String methodname, Map<String, String> parameters) throws UiMutilatorException {
 		try
 		{
 			ArrayList<String> arguments = new ArrayList<String>(Arrays.asList("shell", "uiautomator", "runtest", jarfile,
@@ -47,21 +47,25 @@ class UiAutomatorRunner {
 			return result;
 		}
 		catch (UnsupportedEncodingException  e) {
-			throw new UiMutilator("Could not run test on device", e);
+			throw new UiMutilatorException("Could not run test on device", e);
 		} catch (AdbException e) {
-			throw new UiMutilator("Could not run test on device", e);
+			throw new UiMutilatorException("Could not run test on device", e);
 		} catch (IOException e) {
-			throw new UiMutilator("Could not run test on device", e);
+			throw new UiMutilatorException("Could not run test on device", e);
 		}
 	}
 
-	private String parseTests(BufferedReader input, String classname, String methodname) throws IOException, UiMutilator {
+	private String parseTests(BufferedReader input, String classname, String methodname) throws IOException, UiMutilatorException {
 		String line;
 		String lastExceptionMessage = null;
 		String response = null;
+		
+		int n = 0;
 		while ((line = input.readLine()) != null)
 		{
-			System.out.println("line: " + line);
+			if (n++ % 2 == 1) continue;
+			
+			System.out.println(line);
 			
 			if (line.startsWith(INSTRUMENTATION_STATUS))
 			{
@@ -70,7 +74,7 @@ class UiAutomatorRunner {
 				{
 					String classname2 = rest.substring("class=".length());
 					if (!classname2.equals(classname)) {
-						throw new UiMutilator("Expected class " + classname + " to be run, but " + classname2 + " was run");
+						throw new UiMutilatorException("Expected class " + classname + " to be run, but " + classname2 + " was run");
 					}
 				}
 				int idx = rest.indexOf("UiObjectNotFoundException: ");
@@ -87,9 +91,9 @@ class UiAutomatorRunner {
 			if ("FAILURES!!!".equals(line))
 			{
 				if (lastExceptionMessage == null)
-					throw new UiMutilator("Could not execute " + classname + "#" + methodname + " on device");
+					throw new UiMutilatorException("Could not execute " + classname + "#" + methodname + " on device");
 				else
-					throw new UiMutilator("UiObject not found: " + lastExceptionMessage);
+					throw new UiMutilatorException("UiObject not found: " + lastExceptionMessage);
 			}
 		}	
 		return response;

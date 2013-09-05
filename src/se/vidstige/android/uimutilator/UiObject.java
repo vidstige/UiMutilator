@@ -12,46 +12,46 @@ public class UiObject {
 		this.selector = selector;
 	}
 
-	private String run(String methodname) throws UiMutilator {
+	private String run(String methodname) throws UiMutilatorException {
 		Map<String, String> parameters = new HashMap<String, String>();
 		selector.serializeTo(parameters, "s0_");
 		return runner.run("se.vidstige.android.uimutilator.commandtests.UiObjectCommands", methodname, parameters);
 	}
 	
-	private boolean runBool(String methodname) throws UiMutilator {
+	private boolean runBool(String methodname) throws UiMutilatorException {
 		String result = run(methodname);
 		return Boolean.parseBoolean(result);
 	}
 	
-	public void click() throws UiMutilator {
+	public void click() throws UiMutilatorException {
 		run("testClick");
 	}
 	
-	public void testLongClick() throws UiMutilator {
+	public void testLongClick() throws UiMutilatorException {
 		run("testLongClick");
 	}
 	
-	public String getContentDescription() throws UiMutilator {	
+	public String getContentDescription() throws UiMutilatorException {	
 		return run("testGetContentDescription");
 	}
 	
-	public boolean isChecked() throws UiMutilator {		
+	public boolean isChecked() throws UiMutilatorException {		
 		return runBool("testIsChecked");
 	}
 	
-	public boolean isEnabled() throws UiMutilator {
+	public boolean isEnabled() throws UiMutilatorException {
 		return runBool("testIsEnabled");
 	}
 	
-	public void clickAndWaitForNewWindow() throws UiMutilator {
+	public void clickAndWaitForNewWindow() throws UiMutilatorException {
 		run("testClickAndWaitForNewWindow");
 	}
 
-	public String getText() throws UiMutilator {
+	public String getText() throws UiMutilatorException {
 		return run("testGetText");
 	}
 
-	public void setText(String text) throws UiMutilator {
+	public void setText(String text) throws UiMutilatorException {
 		Map<String, String> parameters = new HashMap<String, String>();
 		selector.serializeTo(parameters, "s0_");
 		
@@ -63,11 +63,11 @@ public class UiObject {
 				parameters);	
 	}
 
-	public void clearTextField() throws UiMutilator {
+	public void clearTextField() throws UiMutilatorException {
 		run("testClearTextField");
 	}
 	
-	public boolean exists() throws UiMutilator {
+	public boolean exists() throws UiMutilatorException {
 		return runBool("testExists");
 	}
 }

@@ -17,7 +17,7 @@ public class UiDevice {
 	private final Adb adb;
 	private final UiAutomatorRunner runner;
 	
-	UiDevice(AdbDevice device) throws UiMutilator {
+	UiDevice(AdbDevice device) throws UiMutilatorException {
 		try
 		{
 			adb = new Adb(device);
@@ -43,13 +43,13 @@ public class UiDevice {
 			adb.push(deluxJar, "/data/local/tmp/command-tests.jar");
 		}
 		catch (IOException e) {
-			throw new UiMutilator("Could not create UiDevice", e);			
+			throw new UiMutilatorException("Could not create UiDevice", e);			
 		} catch (AdbException e) {
-			throw new UiMutilator("Could not create UiDevice", e);
+			throw new UiMutilatorException("Could not create UiDevice", e);
 		}
 	}
 	
-	public void takeScreenshot(File destination) throws UiMutilator
+	public void takeScreenshot(File destination) throws UiMutilatorException
 	{
 		try
 		{
@@ -60,7 +60,7 @@ public class UiDevice {
 		}
 		catch (AdbException e)
 		{
-			throw new UiMutilator("Could save take screenshot to " + destination.getPath(), e);
+			throw new UiMutilatorException("Could save take screenshot to " + destination.getPath(), e);
 		}
 	}
 
@@ -72,87 +72,87 @@ public class UiDevice {
 		return new UiScrollable(runner, selector);
 	}
 
-	public void pressHome() throws UiMutilator {
+	public void pressHome() throws UiMutilatorException {
 		runTest("testPressHome");
 	}
 
-	public void pressMenu() throws UiMutilator {
+	public void pressMenu() throws UiMutilatorException {
 		runTest("testPressMenu");
 	}
 	
-	public void click(int x, int y) throws UiMutilator	{
+	public void click(int x, int y) throws UiMutilatorException	{
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("x", Integer.toString(x));
 		parameters.put("y", Integer.toString(y));
 		runTest("testClick", parameters);				
 	}
 	
-	public void freezeRotation() throws UiMutilator {
+	public void freezeRotation() throws UiMutilatorException {
 		runTest("testFreezeRotation");
 	}
 	
-	public void unfreezeRotation() throws UiMutilator
+	public void unfreezeRotation() throws UiMutilatorException
 	{
 		runTest("testUnfreezeRotation");
 	}
 
-	public int getDisplayHeight() throws UiMutilator {
+	public int getDisplayHeight() throws UiMutilatorException {
 		String result = runTest("testGetDisplayHeight", new HashMap<String, String>(0));
 		return Integer.parseInt(result);
 	}
 	
-	public int getDisplayWidth() throws UiMutilator {
+	public int getDisplayWidth() throws UiMutilatorException {
 		String result = runTest("testGetDisplayWidth", new HashMap<String, String>(0));
 		return Integer.parseInt(result);
 	}
 	
-	public int getDisplayRotation() throws UiMutilator
+	public int getDisplayRotation() throws UiMutilatorException
 	{
 		String result = runTest("testGetDisplayRotation", new HashMap<String, String>(0));
 		return Integer.parseInt(result);
 	}
 	
-	public String getLastTraversedText() throws UiMutilator
+	public String getLastTraversedText() throws UiMutilatorException
 	{
 		String result = runTest("testGetLastTraversedText", new HashMap<String, String>(0));
 		return result;
 	}
 	
-	public boolean isScreenOn() throws UiMutilator
+	public boolean isScreenOn() throws UiMutilatorException
 	{
 		String result = runTest("testIsScreenOn", new HashMap<String, String>(0));
 		return Boolean.parseBoolean(result);
 	}
 	
-	public void pressBack() throws UiMutilator	{
+	public void pressBack() throws UiMutilatorException	{
 		runTest("testPressBack");
 	}
 	
-	public void pressSearch() throws UiMutilator {
+	public void pressSearch() throws UiMutilatorException {
 		runTest("testPressSearch");
 	}		
 		
-	public void sleep() throws UiMutilator {
+	public void sleep() throws UiMutilatorException {
 		runTest("testSleep");
 	}
 
-	public void wakeUp() throws UiMutilator {
+	public void wakeUp() throws UiMutilatorException {
 		runTest("testWakeUp");
 	}
 	
-	public void waitForIdle() throws UiMutilator
+	public void waitForIdle() throws UiMutilatorException
 	{
 		runTest("testWaitForIdle");
 	}
 
-	public void waitForIdle(int timeout) throws UiMutilator
+	public void waitForIdle(int timeout) throws UiMutilatorException
 	{
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("timeout", Integer.toString(timeout));
 		runTest("testWaitForIdleTimeout", parameters);
 	}
 	
-	public void swipe(int startX, int startY, int endX, int endY, int steps) throws UiMutilator {
+	public void swipe(int startX, int startY, int endX, int endY, int steps) throws UiMutilatorException {
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("startX", Integer.toString(startX));
 		parameters.put("startY", Integer.toString(startY));
@@ -162,11 +162,11 @@ public class UiDevice {
 		runTest("testSwipe", parameters);		
 	}
 	
-	private String runTest(String methodname, Map<String, String> parameters) throws UiMutilator {
+	private String runTest(String methodname, Map<String, String> parameters) throws UiMutilatorException {
 		return runner.run("se.vidstige.android.uimutilator.commandtests.UiDeviceCommands", methodname, parameters);	
 	}
 	
-	private void runTest(String methodname) throws UiMutilator {
+	private void runTest(String methodname) throws UiMutilatorException {
 		runner.run("se.vidstige.android.uimutilator.commandtests.UiDeviceCommands", methodname, new HashMap<String, String>(0));
 	}
 
