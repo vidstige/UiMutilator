@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 
 import android.widget.TextView;
 
-public class uiAutomatorTests extends UiMultimatorTestCase {  
+public class UiMutilatorTests extends UiMultimatorTestCase {  
 	@Test(expectedExceptions=UiMultimatorException.class, expectedExceptionsMessageRegExp="UiObject not found: UiSelector\\[TEXT=notFound\\]")
 	public void testUiSelectorThatWillThrow() throws Exception {
 		UiDevice uiDevice = getUiDevice().any();
