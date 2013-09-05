@@ -1,4 +1,4 @@
-package se.vidstige.android.uimultimator;
+package se.vidstige.android.uimutilator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,11 +12,11 @@ public class UiScrollable {
 		this.selector = selector;
 	}
 	
-	public void scrollIntoView(UiSelector selector) throws UiMultimatorException {
+	public void scrollIntoView(UiSelector selector) throws UiMutilator {
 		Map<String, String> parameters = new HashMap<String, String>(); 
 		this.selector.serializeTo(parameters, "s0_");
 		selector.serializeTo(parameters, "s1_");
-		runner.run("se.vidstige.android.uimultimator.UiScrollableCommands", "testScrollIntoView", parameters);
+		runner.run("se.vidstige.android.uimutilator.commandtests.UiScrollableCommands", "testScrollIntoView", parameters);
 	}
 
 	public UiObject getChild(UiSelector selector) {

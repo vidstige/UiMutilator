@@ -1,4 +1,4 @@
-package se.vidstige.android.uimultimator;
+package se.vidstige.android.uimutilator.test;
 
 import java.io.File;
 import java.io.IOException;
@@ -7,10 +7,17 @@ import junit.framework.Assert;
 
 import org.testng.annotations.Test;
 
+import se.vidstige.android.uimutilator.UiDevice;
+import se.vidstige.android.uimutilator.UiMutilator;
+import se.vidstige.android.uimutilator.UiMutilatorTestCase;
+import se.vidstige.android.uimutilator.UiObject;
+import se.vidstige.android.uimutilator.UiScrollable;
+import se.vidstige.android.uimutilator.UiSelector;
+
 import android.widget.TextView;
 
-public class UiMutilatorTests extends UiMultimatorTestCase {  
-	@Test(expectedExceptions=UiMultimatorException.class, expectedExceptionsMessageRegExp="UiObject not found: UiSelector\\[TEXT=notFound\\]")
+public class UiMutilatorTests extends UiMutilatorTestCase {  
+	@Test(expectedExceptions=UiMutilator.class, expectedExceptionsMessageRegExp="UiObject not found: UiSelector\\[TEXT=notFound\\]")
 	public void testUiSelectorThatWillThrow() throws Exception {
 		UiDevice uiDevice = getUiDevice().any();
 		uiDevice.pressHome();
@@ -55,7 +62,7 @@ public class UiMutilatorTests extends UiMultimatorTestCase {
 	}
 	
 	@Test
-	public void testScreencapture() throws UiMultimatorException, IOException
+	public void testScreencapture() throws UiMutilator, IOException
 	{
 		UiDevice uiDevice = getUiDevice().any();
 		File file = File.createTempFile("sceenshot", ".png");
@@ -64,7 +71,7 @@ public class UiMutilatorTests extends UiMultimatorTestCase {
 	}
 
 	@Test
-	public void testClick() throws UiMultimatorException, IOException
+	public void testClick() throws UiMutilator, IOException
 	{
 		UiDevice uiDevice = getUiDevice().any();
 		uiDevice.pressHome();
@@ -74,7 +81,7 @@ public class UiMutilatorTests extends UiMultimatorTestCase {
 	}
 	
 	@Test
-	public void testScrollable() throws UiMultimatorException
+	public void testScrollable() throws UiMutilator
 	{
 		UiDevice a = getUiDevice().first();
 		a.pressHome();

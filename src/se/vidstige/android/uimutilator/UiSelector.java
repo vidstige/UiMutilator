@@ -1,4 +1,4 @@
-package se.vidstige.android.uimultimator;
+package se.vidstige.android.uimutilator;
 
 import java.util.HashMap;
 import java.util.Map;

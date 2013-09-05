@@ -1,4 +1,4 @@
-package se.vidstige.android.uimultimator;
+package se.vidstige.android.uimutilator.commandtests;
 
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
