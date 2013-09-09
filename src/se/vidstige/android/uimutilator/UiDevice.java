@@ -36,9 +36,10 @@ public class UiDevice {
 				copy(input, out);
 				input.close();
 				out.close();
+				deluxJar = tmpFile;
 			}		
 			
-			if (deluxJar == null) throw new IllegalStateException("Could not find command-tests.jar in jar-file");
+			if (!deluxJar.exists()) throw new IllegalStateException("Could not find command-tests.jar (Did you run the build.xml in the command-tests folder?)");
 		
 			adb.push(deluxJar, "/data/local/tmp/command-tests.jar");
 		}
