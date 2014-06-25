@@ -15,18 +15,20 @@ Instead of calling `new UiObject()` like in the Android UiAutomator, you have to
 ## Example ##
 This is an example of a *UiMutilator* test
 
-    @Test
-	public void testGetText() throws Exception {
-		UiDevice uiDevice = getUiDevice().any();
-		uiDevice.pressHome();
-		uiDevice.pressMenu();
+```Java
+@Test
+public void testGetText() throws Exception {
+	UiDevice uiDevice = getUiDevice().any();
+	uiDevice.pressHome();
+	uiDevice.pressMenu();
 		
-		UiObject settingsOption = uiDevice.newUiObject(new UiSelector().text("System settings"));
-		settingsOption.clickAndWaitForNewWindow();
+	UiObject settingsOption = uiDevice.newUiObject(new UiSelector().text("System settings"));
+	settingsOption.clickAndWaitForNewWindow();
 		
-		UiObject sound = uiDevice.newUiObject(new UiSelector().text("Sound"));
-		Assert.assertEquals("Sound", sound.getText());
-	}
+	UiObject sound = uiDevice.newUiObject(new UiSelector().text("Sound"));
+	Assert.assertEquals("Sound", sound.getText());
+}
+```
 
 ## Building ##
 To build the 'UiMutilator.jar' from source file follow the following instructions.
